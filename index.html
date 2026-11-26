@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="mono">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
@@ -11,7 +11,7 @@
   <link id="apple-touch-icon" rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%23000000'/%3E%3Crect x='162' y='242' width='188' height='28' rx='6' fill='%23FFFFFF'/%3E%3Crect x='122' y='170' width='26' height='172' rx='8' fill='%23FFFFFF'/%3E%3Crect x='84' y='196' width='24' height='120' rx='7' fill='%23FFFFFF'/%3E%3Crect x='54' y='224' width='18' height='64' rx='6' fill='%23FFFFFF'/%3E%3Crect x='42' y='244' width='14' height='24' rx='5' fill='%23FFFFFF'/%3E%3Crect x='364' y='170' width='26' height='172' rx='8' fill='%23FFFFFF'/%3E%3Crect x='404' y='196' width='24' height='120' rx='7' fill='%23FFFFFF'/%3E%3Crect x='440' y='224' width='18' height='64' rx='6' fill='%23FFFFFF'/%3E%3Crect x='456' y='244' width='14' height='24' rx='5' fill='%23FFFFFF'/%3E%3C/svg%3E" />
   <title>운동 기록</title>
   <style>
-    :root {
+    :root, [data-theme="mono"] {
       --bg-page: #FFFFFF;
       --bg-surface: #F6F7F9;
       --bg-surface-strong: #ECEEF2;
@@ -20,10 +20,57 @@
       --text-secondary: #374151;
       --text-tertiary: #8B95A1;
       --border-hairline: #EAECEF;
-      --accent-black: #111111;
-      --accent-dark: #2C2C2E;
+      --accent-primary: #111111;
+      --accent-hover: #2C2C2E;
+      --accent-soft: #EFEFF1;
+      --accent-soft-text: #111111;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    [data-theme="blue"] {
+      --bg-page: #FFFFFF;
+      --bg-surface: #F3F6FA;
+      --bg-surface-strong: #E4ECF7;
+      --bg-elevated: #FFFFFF;
+      --text-primary: #191F28;
+      --text-secondary: #333D4B;
+      --text-tertiary: #8B95A1;
+      --border-hairline: #E5E8EB;
+      --accent-primary: #3182F6;
+      --accent-hover: #1B64DA;
+      --accent-soft: #E8F3FF;
+      --accent-soft-text: #1B64DA;
+    }
+
+    [data-theme="red"] {
+      --bg-page: #FFFFFF;
+      --bg-surface: #F9F5F6;
+      --bg-surface-strong: #F1E6E8;
+      --bg-elevated: #FFFFFF;
+      --text-primary: #191F28;
+      --text-secondary: #3D3335;
+      --text-tertiary: #94898B;
+      --border-hairline: #EFE8E9;
+      --accent-primary: #F04452;
+      --accent-hover: #D63341;
+      --accent-soft: #FDECEE;
+      --accent-soft-text: #D63341;
+    }
+
+    [data-theme="brown"] {
+      --bg-page: #FFFFFF;
+      --bg-surface: #F7F5F2;
+      --bg-surface-strong: #EBE6DF;
+      --bg-elevated: #FFFFFF;
+      --text-primary: #1F1B18;
+      --text-secondary: #4A4039;
+      --text-tertiary: #968B82;
+      --border-hairline: #EDE8E2;
+      --accent-primary: #7C5841;
+      --accent-hover: #634431;
+      --accent-soft: #F2EAE4;
+      --accent-soft-text: #634431;
     }
 
     * {
@@ -71,6 +118,10 @@
       display: block;
     }
 
+    #view-home.active {
+      padding-bottom: 68px;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
@@ -93,10 +144,10 @@
     }
 
     .pill-badge {
-      background-color: var(--bg-surface);
-      color: var(--text-secondary);
+      background-color: var(--accent-soft);
+      color: var(--accent-soft-text);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       padding: 7px 12px;
       border-radius: 999px;
     }
@@ -204,24 +255,26 @@
 
     .day-cell.today .day-num {
       font-weight: 800;
+      color: var(--accent-primary);
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
     .day-cell.selected {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
     }
 
     .day-cell.selected .day-num {
       color: #FFFFFF;
       font-weight: 700;
+      text-decoration: none;
     }
 
     .workout-dot {
       width: 5px;
       height: 5px;
       border-radius: 50%;
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       margin-top: 4px;
     }
 
@@ -235,18 +288,21 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 12px;
+      gap: 8px;
     }
 
     .summary-date {
       font-size: 16px;
       font-weight: 700;
       color: var(--text-primary);
+      flex-shrink: 0;
     }
 
     .summary-meta {
       font-size: 13px;
       color: var(--text-tertiary);
-      font-weight: 500;
+      font-weight: 600;
+      text-align: right;
     }
 
     .summary-list {
@@ -298,7 +354,7 @@
       line-height: 1.5;
     }
 
-    /* 홈 하단 액션 버튼 영역 */
+    /* 홈 하단 액션 버튼 영역 (운동 시작 / 루틴·통계 / 설정) */
     .home-actions {
       position: fixed;
       left: 50%;
@@ -306,25 +362,25 @@
       bottom: 0;
       width: 100%;
       max-width: 480px;
-      padding: 14px 20px calc(var(--safe-bottom) + 18px);
-      background: linear-gradient(to top, #FFFFFF 80%, rgba(255, 255, 255, 0));
+      padding: 12px 20px calc(var(--safe-bottom) + 16px);
+      background: linear-gradient(to top, #FFFFFF 82%, rgba(255, 255, 255, 0));
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       z-index: 20;
     }
 
     .home-sub-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      gap: 8px;
     }
 
     .btn-primary-large {
       width: 100%;
-      height: 58px;
+      height: 54px;
       border-radius: 18px;
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
       font-size: 17px;
       font-weight: 700;
@@ -339,16 +395,16 @@
 
     .btn-primary-large:active {
       transform: scale(0.985);
-      background-color: var(--accent-dark);
+      background-color: var(--accent-hover);
     }
 
     .btn-secondary-large {
       width: 100%;
-      height: 52px;
-      border-radius: 18px;
+      height: 48px;
+      border-radius: 16px;
       background-color: var(--bg-surface);
       color: var(--text-primary);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       letter-spacing: -0.01em;
       display: flex;
@@ -359,6 +415,27 @@
     }
 
     .btn-secondary-large:active {
+      background-color: var(--bg-surface-strong);
+    }
+
+    .btn-tertiary-wide {
+      width: 100%;
+      height: 44px;
+      border-radius: 15px;
+      background-color: var(--bg-surface);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .btn-tertiary-wide:active {
       background-color: var(--bg-surface-strong);
     }
 
@@ -387,7 +464,7 @@
     }
 
     .split-tab-btn.active {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
     }
 
@@ -412,7 +489,7 @@
       height: 50px;
       padding: 0 20px;
       border-radius: 16px;
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
       font-size: 15px;
       font-weight: 700;
@@ -422,7 +499,7 @@
     }
 
     .routine-add-submit:active {
-      background-color: var(--accent-dark);
+      background-color: var(--accent-hover);
     }
 
     .routine-card-header {
@@ -445,8 +522,8 @@
       width: 24px;
       height: 24px;
       border-radius: 8px;
-      background-color: var(--bg-elevated);
-      color: var(--text-secondary);
+      background-color: var(--accent-soft);
+      color: var(--accent-soft-text);
       font-size: 12px;
       font-weight: 800;
       display: flex;
@@ -485,7 +562,7 @@
     }
 
     .finish-btn {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
       font-size: 14px;
       font-weight: 700;
@@ -495,19 +572,91 @@
     }
 
     .finish-btn:active {
-      background-color: var(--accent-dark);
+      background-color: var(--accent-hover);
     }
 
     .workout-date-banner {
       background-color: var(--bg-surface);
       border-radius: 18px;
-      padding: 15px 20px;
-      text-align: center;
-      font-size: 18px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .workout-date-text {
+      font-size: 17px;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--text-primary);
+    }
+
+    .total-time-badge {
+      background-color: var(--accent-soft);
+      color: var(--accent-soft-text);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 6px 11px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    /* 휴식 타이머 플로팅 배너 */
+    .rest-timer-banner {
+      display: none;
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 12px 16px;
       margin-bottom: 12px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      animation: fadeIn 0.18s ease-out;
+    }
+
+    .rest-timer-banner.active {
+      display: flex;
+    }
+
+    .rest-timer-info {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .rest-timer-label {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: 0.9;
+    }
+
+    .rest-timer-clock {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .rest-timer-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rest-ctrl-btn {
+      background-color: rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 9px;
+      cursor: pointer;
+    }
+
+    .rest-ctrl-btn:active {
+      background-color: rgba(255, 255, 255, 0.32);
     }
 
     .workout-column-header {
@@ -531,8 +680,8 @@
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      border: 1.8px solid var(--text-primary);
-      color: var(--text-primary);
+      border: 1.8px solid var(--accent-primary);
+      color: var(--accent-primary);
       font-size: 17px;
       font-weight: 700;
       display: flex;
@@ -543,7 +692,7 @@
     }
 
     .header-plus-btn:active {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
     }
 
@@ -554,7 +703,7 @@
     }
 
     .inline-routine-cta {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
       font-size: 14px;
       font-weight: 700;
@@ -564,7 +713,7 @@
     }
 
     .inline-routine-cta:active {
-      background-color: var(--accent-dark);
+      background-color: var(--accent-hover);
     }
 
     /* 개별 운동 종목 카드 (운동 시작 & 루틴 공용) */
@@ -623,7 +772,7 @@
     }
 
     .timer-pill.running {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
     }
 
@@ -653,7 +802,7 @@
     }
 
     .set-row.completed {
-      background-color: #EFEFF1;
+      background-color: var(--accent-soft);
     }
 
     .set-index {
@@ -665,7 +814,7 @@
     }
 
     .set-row.completed .set-index {
-      color: var(--text-primary);
+      color: var(--accent-soft-text);
     }
 
     .metric-input-group {
@@ -715,7 +864,7 @@
     }
 
     .set-check-btn.checked {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
     }
 
@@ -759,7 +908,7 @@
     }
 
     .exercise-memo-input:focus {
-      box-shadow: inset 0 0 0 1.5px var(--accent-black);
+      box-shadow: inset 0 0 0 1.5px var(--accent-primary);
       color: var(--text-primary);
     }
 
@@ -774,7 +923,7 @@
     .text-action-btn {
       font-size: 13px;
       font-weight: 700;
-      color: var(--text-secondary);
+      color: var(--accent-soft-text);
       padding: 5px 8px;
       border-radius: 9px;
       cursor: pointer;
@@ -912,8 +1061,8 @@
     .routine-load-badge {
       font-size: 13px;
       font-weight: 700;
-      color: var(--text-secondary);
-      background-color: var(--bg-elevated);
+      color: var(--accent-soft-text);
+      background-color: var(--accent-soft);
       padding: 6px 11px;
       border-radius: 10px;
       flex-shrink: 0;
@@ -972,7 +1121,7 @@
       height: 44px;
       padding: 0 16px;
       border-radius: 12px;
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
       font-size: 14px;
       font-weight: 700;
@@ -998,7 +1147,7 @@
     }
 
     .folder-tab-wrap.active {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
     }
 
     .folder-tab-btn {
@@ -1027,7 +1176,7 @@
     }
 
     .folder-tab-wrap.active .folder-tab-del {
-      color: rgba(255, 255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.75);
     }
 
     /* 폴더 내 저장된 운동 칩 목록 */
@@ -1065,15 +1214,15 @@
     }
 
     .preset-chip-name:active {
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
     }
 
     .chip-folder-badge {
       font-size: 11px;
       font-weight: 600;
-      color: var(--text-tertiary);
-      background-color: var(--bg-surface);
+      color: var(--accent-soft-text);
+      background-color: var(--accent-soft);
       padding: 2px 6px;
       border-radius: 6px;
     }
@@ -1103,7 +1252,7 @@
     .stat-box {
       background-color: var(--bg-surface);
       border-radius: 22px;
-      padding: 20px 18px;
+      padding: 18px 16px;
     }
 
     .stat-label {
@@ -1114,14 +1263,14 @@
     }
 
     .stat-value {
-      font-size: 26px;
+      font-size: 23px;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.03em;
     }
 
     .stat-unit {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-secondary);
       margin-left: 2px;
@@ -1149,7 +1298,7 @@
     .bar-fill {
       width: 100%;
       max-width: 34px;
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       border-radius: 10px 10px 6px 6px;
       min-height: 6px;
       transition: height 0.25s ease;
@@ -1196,13 +1345,250 @@
       color: var(--text-primary);
     }
 
+    /* 설정 화면 */
+    .settings-section-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+    }
+
+    .settings-section-desc {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      margin-bottom: 16px;
+    }
+
+    .theme-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .theme-option-card {
+      background-color: var(--bg-elevated);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      text-align: left;
+      transition: border-color 0.15s, transform 0.1s;
+    }
+
+    .theme-option-card:active {
+      transform: scale(0.98);
+    }
+
+    .theme-option-card.active {
+      border-color: var(--accent-primary);
+    }
+
+    .theme-option-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .theme-swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .theme-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .theme-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .setting-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-hairline);
+      gap: 12px;
+    }
+
+    .setting-row:first-of-type {
+      padding-top: 4px;
+    }
+
+    .setting-row:last-of-type {
+      border-bottom: none;
+      padding-bottom: 2px;
+    }
+
+    .setting-row-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .setting-row-sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .stepper-control {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--bg-elevated);
+      border-radius: 12px;
+      padding: 3px;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    .stepper-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .stepper-btn:active {
+      background-color: var(--bg-surface-strong);
+    }
+
+    .stepper-val {
+      min-width: 54px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .segment-group {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      background-color: var(--bg-elevated);
+      padding: 5px;
+      border-radius: 14px;
+      margin-top: 10px;
+    }
+
+    .segment-group.five-cols {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    .segment-btn {
+      height: 34px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+    }
+
+    .segment-btn.active {
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
+    }
+
+    .toggle-switch {
+      width: 48px;
+      height: 28px;
+      border-radius: 999px;
+      background-color: var(--bg-surface-strong);
+      padding: 3px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .toggle-switch.on {
+      background-color: var(--accent-primary);
+    }
+
+    .toggle-knob {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: #FFFFFF;
+      transition: transform 0.2s;
+    }
+
+    .toggle-switch.on .toggle-knob {
+      transform: translateX(20px);
+    }
+
+    .data-btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .data-action-btn {
+      height: 44px;
+      border-radius: 14px;
+      background-color: var(--bg-elevated);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .data-action-btn:active {
+      background-color: var(--bg-surface-strong);
+    }
+
+    .data-action-btn.full {
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .data-action-btn.danger {
+      width: 100%;
+      color: #E11D48;
+      background-color: #FFF1F2;
+    }
+
     /* 토스트 메시지 */
     .toast {
       position: fixed;
       top: calc(var(--safe-top) + 16px);
       left: 50%;
       transform: translateX(-50%) translateY(-20px);
-      background-color: var(--accent-black);
+      background-color: var(--accent-primary);
       color: #FFFFFF;
       font-size: 14px;
       font-weight: 600;
@@ -1225,7 +1611,7 @@
   <div id="toast" class="toast"></div>
 
   <main class="app-shell">
-    <!-- 1. 처음 시작화면 (달력 + 운동 시작 / 루틴 / 통계) -->
+    <!-- 1. 처음 시작화면 (달력 + 운동 시작 / 루틴·통계 / 설정) -->
     <section id="view-home" class="view active">
       <header class="top-bar">
         <h1 class="page-title">운동 기록</h1>
@@ -1260,10 +1646,11 @@
           <button type="button" id="btn-open-routine" class="btn-secondary-large">루틴</button>
           <button type="button" id="btn-open-stats" class="btn-secondary-large">통계</button>
         </div>
+        <button type="button" id="btn-open-settings" class="btn-tertiary-wide">설정</button>
       </div>
     </section>
 
-    <!-- 2. 루틴 관리 화면 (가슴 / 등 / 어깨 / 하체 / 팔 - 세트별 무게·횟수 및 메모 설정) -->
+    <!-- 2. 루틴 관리 화면 -->
     <section id="view-routine" class="view">
       <header class="top-bar">
         <button type="button" id="btn-routine-back" class="icon-back-btn" aria-label="뒤로 가기">
@@ -1299,7 +1686,22 @@
         </div>
       </div>
 
-      <div id="workout-date-title" class="workout-date-banner">2026년 11월 26일 운동</div>
+      <div class="workout-date-banner">
+        <span id="workout-date-title" class="workout-date-text">2026년 11월 26일 운동</span>
+        <span id="workout-total-time-badge" class="total-time-badge">총 00:00</span>
+      </div>
+
+      <!-- 세트 완료 시 자동 휴식 타이머 배너 -->
+      <div id="rest-timer-banner" class="rest-timer-banner">
+        <div class="rest-timer-info">
+          <span class="rest-timer-label">휴식 시간</span>
+          <span id="rest-timer-clock" class="rest-timer-clock">01:30</span>
+        </div>
+        <div class="rest-timer-controls">
+          <button type="button" id="btn-rest-plus" class="rest-ctrl-btn">+15초</button>
+          <button type="button" id="btn-rest-skip" class="rest-ctrl-btn">건너뛰기</button>
+        </div>
+      </div>
 
       <div class="workout-column-header">
         <span class="column-labels">운동 종목 / 세트 / 진행 시간</span>
@@ -1331,8 +1733,16 @@
           <div class="stat-value"><span id="stat-month-days">0</span><span class="stat-unit">일</span></div>
         </div>
         <div class="stat-box">
+          <div class="stat-label">누적 총 운동 시간</div>
+          <div class="stat-value"><span id="stat-total-time">0</span><span class="stat-unit" id="stat-total-time-unit">분</span></div>
+        </div>
+        <div class="stat-box">
           <div class="stat-label">누적 총 볼륨</div>
           <div class="stat-value"><span id="stat-total-volume">0</span><span class="stat-unit">kg</span></div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">1회 평균 운동 시간</div>
+          <div class="stat-value"><span id="stat-avg-time">0</span><span class="stat-unit">분</span></div>
         </div>
       </div>
 
@@ -1350,6 +1760,108 @@
           <span class="summary-meta">완료 세트 기준</span>
         </div>
         <div id="pr-list-container"></div>
+      </div>
+    </section>
+
+    <!-- 5. 설정 화면 -->
+    <section id="view-settings" class="view">
+      <header class="top-bar">
+        <button type="button" id="btn-settings-back" class="icon-back-btn" aria-label="뒤로 가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <h1 class="page-title" style="font-size: 22px;">설정</h1>
+        <span id="settings-theme-badge" class="pill-badge">모노크롬</span>
+      </header>
+
+      <!-- 테마 색상 설정 -->
+      <div class="card">
+        <h2 class="settings-section-title">테마 색상</h2>
+        <p class="settings-section-desc">앱 전체 포인트 컬러와 버튼 색상을 변경해요</p>
+        <div id="theme-options-grid" class="theme-grid"></div>
+      </div>
+
+      <!-- 기본 운동 프리셋 -->
+      <div class="card">
+        <h2 class="settings-section-title">기본 세트 · 무게 설정</h2>
+        <p class="settings-section-desc">새 종목 추가 시 자동으로 입력되는 기본값이에요</p>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-row-label">기본 세트 수</div>
+            <div class="setting-row-sub">종목 추가 시 생성되는 세트 개수</div>
+          </div>
+          <div class="stepper-control">
+            <button type="button" class="stepper-btn" data-setting-step="defaultSets" data-delta="-1">−</button>
+            <span id="val-defaultSets" class="stepper-val">3세트</span>
+            <button type="button" class="stepper-btn" data-setting-step="defaultSets" data-delta="1">+</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-row-label">기본 시작 무게</div>
+            <div class="setting-row-sub">초기 무게값 (kg)</div>
+          </div>
+          <div class="stepper-control">
+            <button type="button" class="stepper-btn" data-setting-step="defaultWeight" data-delta="-5">−</button>
+            <span id="val-defaultWeight" class="stepper-val">20kg</span>
+            <button type="button" class="stepper-btn" data-setting-step="defaultWeight" data-delta="5">+</button>
+          </div>
+        </div>
+
+        <div class="setting-row">
+          <div>
+            <div class="setting-row-label">기본 목표 횟수</div>
+            <div class="setting-row-sub">세트당 초기 횟수 (회)</div>
+          </div>
+          <div class="stepper-control">
+            <button type="button" class="stepper-btn" data-setting-step="defaultReps" data-delta="-1">−</button>
+            <span id="val-defaultReps" class="stepper-val">12회</span>
+            <button type="button" class="stepper-btn" data-setting-step="defaultReps" data-delta="1">+</button>
+          </div>
+        </div>
+
+        <div class="setting-row" style="flex-direction: column; align-items: stretch;">
+          <div>
+            <div class="setting-row-label">무게 증감 단위</div>
+            <div class="setting-row-sub">원판 규격에 맞춰 입력 단위를 설정해요</div>
+          </div>
+          <div id="weight-step-segments" class="segment-group"></div>
+        </div>
+      </div>
+
+      <!-- 세트 간 휴식 타이머 -->
+      <div class="card">
+        <h2 class="settings-section-title">세트 간 휴식 타이머</h2>
+        <p class="settings-section-desc">세트를 완료(✓) 체크하면 휴식 카운트다운이 자동 시작돼요</p>
+
+        <div id="rest-time-segments" class="segment-group five-cols" style="margin-top: 0; margin-bottom: 12px;"></div>
+
+        <div class="setting-row" style="padding-bottom: 0;">
+          <div>
+            <div class="setting-row-label">휴식 종료 알림음 · 진동</div>
+            <div class="setting-row-sub">휴식 시간이 끝나면 짧은 알림을 울려요</div>
+          </div>
+          <button type="button" id="toggle-rest-sound" class="toggle-switch on" aria-label="휴식 종료 알림 전환">
+            <span class="toggle-knob"></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 데이터 백업 및 관리 -->
+      <div class="card">
+        <h2 class="settings-section-title">데이터 백업 및 관리</h2>
+        <p class="settings-section-desc">모든 기록과 루틴은 기기 내부에만 안전하게 저장돼요</p>
+
+        <div class="data-btn-grid">
+          <button type="button" id="btn-export-copy" class="data-action-btn">백업 코드 복사</button>
+          <button type="button" id="btn-export-file" class="data-action-btn">파일로 저장</button>
+        </div>
+        <button type="button" id="btn-import-file" class="data-action-btn full">백업 파일 불러오기</button>
+        <input type="file" id="import-file-input" accept=".json,application/json" style="display: none;" />
+        <button type="button" id="btn-reset-all" class="data-action-btn danger">전체 데이터 초기화</button>
       </div>
     </section>
   </main>
@@ -1393,8 +1905,55 @@
 
   <script>
     (function () {
-      // iOS 홈 화면 추가용 고해상도 모노크롬 바벨 PNG 아이콘 자동 생성 및 바인딩
-      function initAppIcons() {
+      const STORAGE_KEY = 'minimal_workout_logs_v2';
+      const LIBRARY_KEY = 'minimal_workout_library_v1';
+      const ROUTINE_KEY = 'minimal_workout_routines_v1';
+      const SETTINGS_KEY = 'minimal_workout_settings_v1';
+      const ROUTINE_SPLITS = ['가슴', '등', '어깨', '하체', '팔'];
+
+      const THEMES = [
+        { id: 'mono', name: '모노크롬', sub: '검정 · 화이트', color: '#111111', iconBg: '#000000' },
+        { id: 'blue', name: '토스 블루', sub: '블루 포인트', color: '#3182F6', iconBg: '#3182F6' },
+        { id: 'red', name: '크림슨 레드', sub: '레드 포인트', color: '#F04452', iconBg: '#F04452' },
+        { id: 'brown', name: '에스프레소', sub: '브라운 포인트', color: '#7C5841', iconBg: '#7C5841' }
+      ];
+
+      const DEFAULT_SETTINGS = {
+        theme: 'mono',
+        defaultSets: 3,
+        defaultWeight: 20,
+        defaultReps: 12,
+        weightStep: 2.5,
+        restSeconds: 0,
+        soundEnabled: true
+      };
+
+      function loadSettings() {
+        const raw = localStorage.getItem(SETTINGS_KEY);
+        if (raw) {
+          try {
+            const parsed = JSON.parse(raw);
+            return Object.assign({}, DEFAULT_SETTINGS, parsed);
+          } catch (e) {}
+        }
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(DEFAULT_SETTINGS));
+        return Object.assign({}, DEFAULT_SETTINGS);
+      }
+
+      function saveSettings(s) {
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+      }
+
+      let settings = loadSettings();
+
+      // 테마 및 동적 아이콘 적용
+      function applyTheme(themeId) {
+        const themeObj = THEMES.find(t => t.id === themeId) || THEMES[0];
+        document.documentElement.setAttribute('data-theme', themeObj.id);
+        initAppIcons(themeObj.iconBg);
+      }
+
+      function initAppIcons(bgColor = '#000000') {
         try {
           const canvas = document.createElement('canvas');
           canvas.width = 512;
@@ -1402,7 +1961,7 @@
           const ctx = canvas.getContext('2d');
           if (!ctx) return;
 
-          ctx.fillStyle = '#000000';
+          ctx.fillStyle = bgColor;
           ctx.fillRect(0, 0, 512, 512);
 
           function fillRoundRect(x, y, w, h, r) {
@@ -1417,14 +1976,11 @@
           }
 
           ctx.fillStyle = '#FFFFFF';
-          // 중앙 바
           fillRoundRect(162, 242, 188, 28, 6);
-          // 좌측 원판 및 마개
           fillRoundRect(122, 170, 26, 172, 8);
           fillRoundRect(84, 196, 24, 120, 7);
           fillRoundRect(54, 224, 18, 64, 6);
           fillRoundRect(42, 244, 14, 24, 5);
-          // 우측 원판 및 마개
           fillRoundRect(364, 170, 26, 172, 8);
           fillRoundRect(404, 196, 24, 120, 7);
           fillRoundRect(440, 224, 18, 64, 6);
@@ -1440,14 +1996,10 @@
           }
         } catch (e) {}
       }
-      initAppIcons();
 
-      const STORAGE_KEY = 'minimal_workout_logs_v2';
-      const LIBRARY_KEY = 'minimal_workout_library_v1';
-      const ROUTINE_KEY = 'minimal_workout_routines_v1';
-      const ROUTINE_SPLITS = ['가슴', '등', '어깨', '하체', '팔'];
+      applyTheme(settings.theme);
 
-      // 날짜 유틸리티 (YYYY-MM-DD)
+      // 날짜 및 시간 포맷 유틸리티
       function toDateKey(date) {
         const y = date.getFullYear();
         const m = String(date.getMonth() + 1).padStart(2, '0');
@@ -1461,12 +2013,29 @@
       }
 
       function formatSeconds(sec) {
-        const m = String(Math.floor(sec / 60)).padStart(2, '0');
-        const s = String(sec % 60).padStart(2, '0');
-        return `${m}:${s}`;
+        const total = Math.max(0, Math.floor(Number(sec) || 0));
+        const h = Math.floor(total / 3600);
+        const m = String(Math.floor((total % 3600) / 60)).padStart(2, '0');
+        const s = String(total % 60).padStart(2, '0');
+        return h > 0 ? `${h}:${m}:${s}` : `${m}:${s}`;
       }
 
-      // 사용자 폴더 및 저장된 종목 로드/저장
+      function formatDurationKorean(sec) {
+        const total = Math.max(0, Math.floor(Number(sec) || 0));
+        if (total === 0) return '0분';
+        const h = Math.floor(total / 3600);
+        const m = Math.floor((total % 3600) / 60);
+        const s = total % 60;
+        if (h > 0) {
+          return m > 0 ? `${h}시간 ${m}분` : `${h}시간`;
+        }
+        if (m > 0) {
+          return s > 0 ? `${m}분 ${s}초` : `${m}분`;
+        }
+        return `${s}초`;
+      }
+
+      // 라이브러리 / 루틴 / 로그 로드·저장
       function loadLibrary() {
         const raw = localStorage.getItem(LIBRARY_KEY);
         if (raw) {
@@ -1486,7 +2055,6 @@
         localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
       }
 
-      // 부위별 루틴 로드/저장
       function loadRoutines() {
         const base = { '가슴': [], '등': [], '어깨': [], '하체': [], '팔': [] };
         const raw = localStorage.getItem(ROUTINE_KEY);
@@ -1507,9 +2075,9 @@
                       };
                     }
                     migrated = true;
-                    const count = Math.max(1, Number(item.defaultSets) || 3);
-                    const w = Number(item.defaultWeight) ?? 20;
-                    const r = Number(item.defaultReps) || 12;
+                    const count = Math.max(1, Number(item.defaultSets) || settings.defaultSets);
+                    const w = Number(item.defaultWeight) ?? settings.defaultWeight;
+                    const r = Number(item.defaultReps) || settings.defaultReps;
                     return {
                       id: item.id || ('rt-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)),
                       name: item.name,
@@ -1532,7 +2100,6 @@
         localStorage.setItem(ROUTINE_KEY, JSON.stringify(data));
       }
 
-      // 운동 로그 로드/저장
       function loadLogs() {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
@@ -1560,17 +2127,22 @@
       let viewMonth = today.getMonth();
       let selectedDateKey = toDateKey(today);
 
-      // 현재 진행 중인 운동 세션 상태
+      // 운동 세션 및 타이머 상태
       let activeExercises = [];
       let runningTimerId = null;
       let timerInterval = null;
+
+      // 휴식 타이머 상태
+      let restRemaining = 0;
+      let restInterval = null;
 
       // DOM 참조
       const views = {
         home: document.getElementById('view-home'),
         routine: document.getElementById('view-routine'),
         workout: document.getElementById('view-workout'),
-        stats: document.getElementById('view-stats')
+        stats: document.getElementById('view-stats'),
+        settings: document.getElementById('view-settings')
       };
 
       const toastEl = document.getElementById('toast');
@@ -1586,13 +2158,17 @@
         Object.values(views).forEach(v => v.classList.remove('active'));
         views[name].classList.add('active');
         window.scrollTo(0, 0);
-        if (name !== 'workout') stopTimer();
+        if (name !== 'workout') {
+          stopTimer();
+          stopRestTimer();
+        }
         if (name === 'home') renderHome();
         if (name === 'routine') renderRoutineView();
         if (name === 'stats') renderStats();
+        if (name === 'settings') renderSettingsView();
       }
 
-      // ---------------- 1. 홈 화면 (달력) ----------------
+      // ---------------- 1. 홈 화면 (달력 + 일일 총 운동시간 요약) ----------------
       function renderHome() {
         const monthLabel = document.getElementById('calendar-month-label');
         monthLabel.textContent = `${viewYear}년 ${viewMonth + 1}월`;
@@ -1666,7 +2242,9 @@
           listEl.appendChild(hint);
         } else {
           const totalSets = dayExercises.reduce((acc, ex) => acc + ex.sets.length, 0);
-          metaEl.textContent = `${dayExercises.length}종목 · 총 ${totalSets}set`;
+          const totalDurationSec = dayExercises.reduce((acc, ex) => acc + (Number(ex.elapsedSeconds) || 0), 0);
+          const timeText = totalDurationSec > 0 ? ` · ${formatDurationKorean(totalDurationSec)}` : '';
+          metaEl.textContent = `${dayExercises.length}종목 · ${totalSets}set${timeText}`;
           startBtn.textContent = '운동 이어하기 / 수정';
 
           dayExercises.forEach(ex => {
@@ -1708,7 +2286,7 @@
         renderHome();
       });
 
-      // ---------------- 2. 루틴 화면 (세트별 무게·횟수 및 메모 설정) ----------------
+      // ---------------- 2. 루틴 화면 ----------------
       function renderRoutineView() {
         const tabsEl = document.getElementById('routine-split-tabs');
         tabsEl.innerHTML = '';
@@ -1757,7 +2335,7 @@
                 <div class="set-row">
                   <span class="set-index">${sIdx + 1}세트</span>
                   <label class="metric-input-group">
-                    <input type="number" inputmode="decimal" step="0.5" class="big-number-input" value="${s.weight}" data-rt-ex="${exIdx}" data-rt-set="${sIdx}" data-rt-field="weight" />
+                    <input type="number" inputmode="decimal" step="${settings.weightStep}" class="big-number-input" value="${s.weight}" data-rt-ex="${exIdx}" data-rt-set="${sIdx}" data-rt-field="weight" />
                     <span class="unit-label">kg</span>
                   </label>
                   <label class="metric-input-group">
@@ -1786,7 +2364,7 @@
         if (addSetBtn) {
           const exIdx = Number(addSetBtn.dataset.rtEx);
           const sets = routines[activeSplit][exIdx].sets;
-          const last = sets[sets.length - 1] || { weight: 20, reps: 12 };
+          const last = sets[sets.length - 1] || { weight: settings.defaultWeight, reps: settings.defaultReps };
           sets.push({ weight: last.weight, reps: last.reps });
           saveRoutines(routines);
           renderRoutineView();
@@ -1844,15 +2422,16 @@
           return;
         }
 
+        const initialSets = Array.from({ length: settings.defaultSets }, () => ({
+          weight: settings.defaultWeight,
+          reps: settings.defaultReps
+        }));
+
         routines[activeSplit].push({
           id: 'rt-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
           name,
           memo: '',
-          sets: [
-            { weight: 20, reps: 12 },
-            { weight: 20, reps: 12 },
-            { weight: 20, reps: 12 }
-          ]
+          sets: initialSets
         });
         saveRoutines(routines);
         nameInput.value = '';
@@ -1865,7 +2444,79 @@
         if (e.key === 'Enter') addRoutineItem();
       });
 
-      // ---------------- 3. 운동 시작 화면 ----------------
+      // ---------------- 3. 운동 시작 화면 (총 운동시간 합산 + 휴식 타이머) ----------------
+      function getTotalActiveWorkoutSeconds() {
+        return activeExercises.reduce((sum, ex) => sum + (Number(ex.elapsedSeconds) || 0), 0);
+      }
+
+      function updateTotalWorkoutTimeDisplay() {
+        const badge = document.getElementById('workout-total-time-badge');
+        if (badge) {
+          badge.textContent = `총 ${formatSeconds(getTotalActiveWorkoutSeconds())}`;
+        }
+      }
+
+      function playRestDoneAlert() {
+        if (!settings.soundEnabled) return;
+        try {
+          if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) {
+            const ctx = new AudioCtx();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(880, ctx.currentTime);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.36);
+          }
+        } catch (e) {}
+      }
+
+      function startRestTimer(seconds) {
+        if (!seconds || seconds <= 0) return;
+        stopRestTimer();
+        restRemaining = seconds;
+        const banner = document.getElementById('rest-timer-banner');
+        const clock = document.getElementById('rest-timer-clock');
+        clock.textContent = formatSeconds(restRemaining);
+        banner.classList.add('active');
+
+        restInterval = setInterval(() => {
+          restRemaining -= 1;
+          if (restRemaining <= 0) {
+            stopRestTimer();
+            playRestDoneAlert();
+            showToast('휴식 시간이 종료됐어요! 다음 세트를 시작하세요');
+            return;
+          }
+          clock.textContent = formatSeconds(restRemaining);
+        }, 1000);
+      }
+
+      function stopRestTimer() {
+        if (restInterval) {
+          clearInterval(restInterval);
+          restInterval = null;
+        }
+        restRemaining = 0;
+        const banner = document.getElementById('rest-timer-banner');
+        if (banner) banner.classList.remove('active');
+      }
+
+      document.getElementById('btn-rest-plus').addEventListener('click', () => {
+        if (restRemaining > 0) {
+          restRemaining += 15;
+          document.getElementById('rest-timer-clock').textContent = formatSeconds(restRemaining);
+        }
+      });
+
+      document.getElementById('btn-rest-skip').addEventListener('click', stopRestTimer);
+
       function getPreviousRecordText(exerciseName) {
         const sortedDates = Object.keys(logs)
           .filter(k => k < selectedDateKey && Array.isArray(logs[k]))
@@ -1896,6 +2547,7 @@
           activeExercises = [];
         }
 
+        stopRestTimer();
         renderWorkoutCards();
         switchView('workout');
       }
@@ -1916,6 +2568,7 @@
             if (timerEl) {
               timerEl.textContent = formatSeconds(target.elapsedSeconds);
             }
+            updateTotalWorkoutTimeDisplay();
           }
         }, 1000);
         renderWorkoutCards();
@@ -1930,6 +2583,7 @@
       }
 
       function renderWorkoutCards() {
+        updateTotalWorkoutTimeDisplay();
         const container = document.getElementById('exercise-cards-container');
         container.innerHTML = '';
 
@@ -1973,7 +2627,7 @@
                 <div class="set-row ${s.completed ? 'completed' : ''}">
                   <span class="set-index">${sIdx + 1}세트</span>
                   <label class="metric-input-group">
-                    <input type="number" inputmode="decimal" step="0.5" class="big-number-input" value="${s.weight}" data-ex="${exIdx}" data-set="${sIdx}" data-field="weight" />
+                    <input type="number" inputmode="decimal" step="${settings.weightStep}" class="big-number-input" value="${s.weight}" data-ex="${exIdx}" data-set="${sIdx}" data-field="weight" />
                     <span class="unit-label">kg</span>
                   </label>
                   <label class="metric-input-group">
@@ -1998,7 +2652,6 @@
         });
       }
 
-      // 운동 카드 내 이벤트 위임
       document.getElementById('exercise-cards-container').addEventListener('click', (e) => {
         if (e.target.closest('[data-action="quick-load-routine"]')) {
           openLoadRoutineSheet();
@@ -2015,8 +2668,12 @@
         if (checkBtn) {
           const exIdx = Number(checkBtn.dataset.ex);
           const setIdx = Number(checkBtn.dataset.set);
-          activeExercises[exIdx].sets[setIdx].completed = !activeExercises[exIdx].sets[setIdx].completed;
+          const nowCompleted = !activeExercises[exIdx].sets[setIdx].completed;
+          activeExercises[exIdx].sets[setIdx].completed = nowCompleted;
           renderWorkoutCards();
+          if (nowCompleted && settings.restSeconds > 0) {
+            startRestTimer(settings.restSeconds);
+          }
           return;
         }
 
@@ -2037,7 +2694,7 @@
         if (addSetBtn) {
           const exIdx = Number(addSetBtn.dataset.ex);
           const sets = activeExercises[exIdx].sets;
-          const last = sets[sets.length - 1] || { weight: 20, reps: 10 };
+          const last = sets[sets.length - 1] || { weight: settings.defaultWeight, reps: settings.defaultReps };
           sets.push({ weight: last.weight, reps: last.reps, completed: false });
           renderWorkoutCards();
           return;
@@ -2313,16 +2970,18 @@
           }
         }
 
+        const initialSets = Array.from({ length: settings.defaultSets }, () => ({
+          weight: settings.defaultWeight,
+          reps: settings.defaultReps,
+          completed: false
+        }));
+
         activeExercises.push({
           id: 'ex-' + Date.now(),
           name: trimmed,
           elapsedSeconds: 0,
           memo: '',
-          sets: [
-            { weight: 20, reps: 12, completed: false },
-            { weight: 20, reps: 12, completed: false },
-            { weight: 20, reps: 12, completed: false }
-          ]
+          sets: initialSets
         });
         closeAddSheet();
         renderWorkoutCards();
@@ -2356,16 +3015,21 @@
         if (e.key === 'Enter') addNewExercise(newExInput.value, true);
       });
 
-      // 기록 저장
+      // 기록 저장 (일일 운동시간 합산 기록 포함)
       document.getElementById('btn-finish-workout').addEventListener('click', () => {
         stopTimer();
+        stopRestTimer();
         if (activeExercises.length === 0) {
           delete logs[selectedDateKey];
+          saveLogs(logs);
+          showToast('운동 기록이 비워졌어요');
         } else {
+          const totalSec = getTotalActiveWorkoutSeconds();
           logs[selectedDateKey] = activeExercises;
+          saveLogs(logs);
+          const timeMsg = totalSec > 0 ? ` (총 ${formatDurationKorean(totalSec)})` : '';
+          showToast(`운동 기록이 저장됐어요${timeMsg}`);
         }
-        saveLogs(logs);
-        showToast('운동 기록이 저장됐어요');
         switchView('home');
       });
 
@@ -2376,10 +3040,14 @@
         const thisMonthDays = allKeys.filter(k => k.startsWith(monthPrefix)).length;
 
         let totalVolume = 0;
+        let totalSecondsAll = 0;
+        let timedDaysCount = 0;
         const prMap = {};
 
         allKeys.forEach(dateKey => {
+          let daySec = 0;
           logs[dateKey].forEach(ex => {
+            daySec += Number(ex.elapsedSeconds) || 0;
             ex.sets.forEach(s => {
               const w = Number(s.weight) || 0;
               const r = Number(s.reps) || 0;
@@ -2390,10 +3058,26 @@
               }
             });
           });
+          if (daySec > 0) {
+            totalSecondsAll += daySec;
+            timedDaysCount += 1;
+          }
         });
 
         document.getElementById('stat-month-days').textContent = thisMonthDays;
         document.getElementById('stat-total-volume').textContent = totalVolume.toLocaleString();
+
+        const totalMinutes = Math.round(totalSecondsAll / 60);
+        if (totalMinutes >= 60) {
+          document.getElementById('stat-total-time').textContent = (totalMinutes / 60).toFixed(1);
+          document.getElementById('stat-total-time-unit').textContent = '시간';
+        } else {
+          document.getElementById('stat-total-time').textContent = totalMinutes;
+          document.getElementById('stat-total-time-unit').textContent = '분';
+        }
+
+        const avgMinutes = timedDaysCount > 0 ? Math.round((totalSecondsAll / timedDaysCount) / 60) : 0;
+        document.getElementById('stat-avg-time').textContent = avgMinutes;
 
         const chartEl = document.getElementById('weekly-bar-chart');
         chartEl.innerHTML = '';
@@ -2444,13 +3128,229 @@
         }
       }
 
+      // ---------------- 5. 설정 화면 ----------------
+      let resetConfirmPending = false;
+      let resetConfirmTimer = null;
+
+      function renderSettingsView() {
+        const currentThemeObj = THEMES.find(t => t.id === settings.theme) || THEMES[0];
+        document.getElementById('settings-theme-badge').textContent = currentThemeObj.name;
+
+        // 테마 옵션 카드
+        const themeGrid = document.getElementById('theme-options-grid');
+        themeGrid.innerHTML = '';
+        THEMES.forEach(t => {
+          const isActive = settings.theme === t.id;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `theme-option-card ${isActive ? 'active' : ''}`;
+          btn.innerHTML = `
+            <div class="theme-option-left">
+              <span class="theme-swatch" style="background-color: ${t.color};">${isActive ? '✓' : ''}</span>
+              <div>
+                <div class="theme-name">${t.name}</div>
+                <div class="theme-sub">${t.sub}</div>
+              </div>
+            </div>
+          `;
+          btn.addEventListener('click', () => {
+            settings.theme = t.id;
+            saveSettings(settings);
+            applyTheme(t.id);
+            renderSettingsView();
+            showToast(`'${t.name}' 테마가 적용됐어요`);
+          });
+          themeGrid.appendChild(btn);
+        });
+
+        // 스테퍼 값 업데이트
+        document.getElementById('val-defaultSets').textContent = `${settings.defaultSets}세트`;
+        document.getElementById('val-defaultWeight').textContent = `${settings.defaultWeight}kg`;
+        document.getElementById('val-defaultReps').textContent = `${settings.defaultReps}회`;
+
+        // 무게 증감 단위 세그먼트
+        const stepOptions = [0.5, 1, 2.5, 5];
+        const stepContainer = document.getElementById('weight-step-segments');
+        stepContainer.innerHTML = '';
+        stepOptions.forEach(stepVal => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `segment-btn ${Number(settings.weightStep) === stepVal ? 'active' : ''}`;
+          btn.textContent = `${stepVal}kg`;
+          btn.addEventListener('click', () => {
+            settings.weightStep = stepVal;
+            saveSettings(settings);
+            renderSettingsView();
+            showToast(`무게 입력 단위가 ${stepVal}kg으로 설정됐어요`);
+          });
+          stepContainer.appendChild(btn);
+        });
+
+        // 휴식 타이머 시간 세그먼트
+        const restOptions = [
+          { val: 0, label: '꺼짐' },
+          { val: 60, label: '60초' },
+          { val: 90, label: '90초' },
+          { val: 120, label: '120초' },
+          { val: 180, label: '180초' }
+        ];
+        const restContainer = document.getElementById('rest-time-segments');
+        restContainer.innerHTML = '';
+        restOptions.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `segment-btn ${Number(settings.restSeconds) === opt.val ? 'active' : ''}`;
+          btn.textContent = opt.label;
+          btn.addEventListener('click', () => {
+            settings.restSeconds = opt.val;
+            saveSettings(settings);
+            renderSettingsView();
+            showToast(opt.val === 0 ? '자동 휴식 타이머가 꺼졌어요' : `세트 완료 시 ${opt.label} 휴식 타이머가 작동해요`);
+          });
+          restContainer.appendChild(btn);
+        });
+
+        // 알림음 토글
+        const soundToggle = document.getElementById('toggle-rest-sound');
+        soundToggle.classList.toggle('on', Boolean(settings.soundEnabled));
+      }
+
+      document.getElementById('view-settings').addEventListener('click', (e) => {
+        const stepBtn = e.target.closest('[data-setting-step]');
+        if (stepBtn) {
+          const key = stepBtn.dataset.settingStep;
+          const delta = Number(stepBtn.dataset.delta);
+          if (key === 'defaultSets') {
+            settings.defaultSets = Math.min(8, Math.max(1, settings.defaultSets + delta));
+          } else if (key === 'defaultWeight') {
+            const stepDelta = delta > 0 ? settings.weightStep : -settings.weightStep;
+            settings.defaultWeight = Math.max(0, Math.round((settings.defaultWeight + stepDelta) * 10) / 10);
+          } else if (key === 'defaultReps') {
+            settings.defaultReps = Math.min(50, Math.max(1, settings.defaultReps + delta));
+          }
+          saveSettings(settings);
+          renderSettingsView();
+        }
+      });
+
+      document.getElementById('toggle-rest-sound').addEventListener('click', () => {
+        settings.soundEnabled = !settings.soundEnabled;
+        saveSettings(settings);
+        renderSettingsView();
+        showToast(settings.soundEnabled ? '휴식 종료 알림을 켰어요' : '휴식 종료 알림을 껐어요');
+      });
+
+      // 백업 내보내기 (클립보드 & 파일)
+      function buildBackupPayload() {
+        return JSON.stringify({
+          app: 'minimal-workout-tracker',
+          exportedAt: new Date().toISOString(),
+          logs,
+          routines,
+          library,
+          settings
+        }, null, 2);
+      }
+
+      document.getElementById('btn-export-copy').addEventListener('click', async () => {
+        const payload = buildBackupPayload();
+        try {
+          await navigator.clipboard.writeText(payload);
+          showToast('백업 데이터가 클립보드에 복사됐어요');
+        } catch (e) {
+          showToast('클립보드 복사를 지원하지 않는 환경이에요');
+        }
+      });
+
+      document.getElementById('btn-export-file').addEventListener('click', () => {
+        const payload = buildBackupPayload();
+        const blob = new Blob([payload], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `workout-backup-${toDateKey(new Date())}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        showToast('백업 JSON 파일을 저장했어요');
+      });
+
+      const importInput = document.getElementById('import-file-input');
+      document.getElementById('btn-import-file').addEventListener('click', () => {
+        importInput.value = '';
+        importInput.click();
+      });
+
+      importInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            const parsed = JSON.parse(String(reader.result));
+            if (parsed.logs && typeof parsed.logs === 'object') {
+              logs = parsed.logs;
+              saveLogs(logs);
+            }
+            if (parsed.routines && typeof parsed.routines === 'object') {
+              routines = parsed.routines;
+              saveRoutines(routines);
+            }
+            if (parsed.library && typeof parsed.library === 'object') {
+              library = parsed.library;
+              saveLibrary(library);
+            }
+            if (parsed.settings && typeof parsed.settings === 'object') {
+              settings = Object.assign({}, DEFAULT_SETTINGS, parsed.settings);
+              saveSettings(settings);
+              applyTheme(settings.theme);
+            }
+            renderSettingsView();
+            showToast('백업 데이터를 성공적으로 불러왔어요');
+          } catch (err) {
+            showToast('올바른 백업 JSON 파일이 아니에요');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // 전체 데이터 초기화 (2단계 안전 확인)
+      const resetBtn = document.getElementById('btn-reset-all');
+      resetBtn.addEventListener('click', () => {
+        if (!resetConfirmPending) {
+          resetConfirmPending = true;
+          resetBtn.textContent = '정말 초기화할까요? 한 번 더 누르면 삭제돼요';
+          clearTimeout(resetConfirmTimer);
+          resetConfirmTimer = setTimeout(() => {
+            resetConfirmPending = false;
+            resetBtn.textContent = '전체 데이터 초기화';
+          }, 4000);
+          return;
+        }
+        clearTimeout(resetConfirmTimer);
+        resetConfirmPending = false;
+        resetBtn.textContent = '전체 데이터 초기화';
+
+        localStorage.removeItem(STORAGE_KEY);
+        localStorage.removeItem(ROUTINE_KEY);
+        localStorage.removeItem(LIBRARY_KEY);
+        logs = loadLogs();
+        routines = loadRoutines();
+        library = loadLibrary();
+        showToast('모든 운동 기록과 루틴을 초기화했어요');
+        switchView('home');
+      });
+
       // 네비게이션 연결
       document.getElementById('btn-start-workout').addEventListener('click', openWorkoutView);
       document.getElementById('btn-open-routine').addEventListener('click', () => switchView('routine'));
       document.getElementById('btn-open-stats').addEventListener('click', () => switchView('stats'));
+      document.getElementById('btn-open-settings').addEventListener('click', () => switchView('settings'));
       document.getElementById('btn-routine-back').addEventListener('click', () => switchView('home'));
       document.getElementById('btn-workout-back').addEventListener('click', () => switchView('home'));
       document.getElementById('btn-stats-back').addEventListener('click', () => switchView('home'));
+      document.getElementById('btn-settings-back').addEventListener('click', () => switchView('home'));
 
       function escapeHtml(str) {
         return String(str)
