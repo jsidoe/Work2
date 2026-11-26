@@ -57,7 +57,7 @@
       min-height: 100dvh;
       background-color: var(--bg-page);
       padding-top: calc(var(--safe-top) + 12px);
-      padding-bottom: calc(var(--safe-bottom) + 110px);
+      padding-bottom: calc(var(--safe-bottom) + 135px);
       position: relative;
     }
 
@@ -283,7 +283,7 @@
       line-height: 1.5;
     }
 
-    /* 홈 하단 액션 버튼 영역 */
+    /* 홈 하단 액션 버튼 영역 (운동 시작 + 루틴/통계) */
     .home-actions {
       position: fixed;
       left: 50%;
@@ -292,11 +292,17 @@
       width: 100%;
       max-width: 480px;
       padding: 14px 20px calc(var(--safe-bottom) + 18px);
-      background: linear-gradient(to top, #FFFFFF 78%, rgba(255, 255, 255, 0));
+      background: linear-gradient(to top, #FFFFFF 80%, rgba(255, 255, 255, 0));
       display: flex;
       flex-direction: column;
       gap: 10px;
       z-index: 20;
+    }
+
+    .home-sub-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
     }
 
     .btn-primary-large {
@@ -341,12 +347,196 @@
       background-color: var(--bg-surface-strong);
     }
 
+    /* 루틴 화면 */
+    .routine-split-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      background-color: var(--bg-surface);
+      padding: 6px;
+      border-radius: 18px;
+      margin-bottom: 16px;
+    }
+
+    .split-tab-btn {
+      height: 40px;
+      border-radius: 13px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s;
+    }
+
+    .split-tab-btn.active {
+      background-color: var(--accent-black);
+      color: #FFFFFF;
+    }
+
+    .routine-add-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .routine-input-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .routine-text-input {
+      flex: 1;
+      height: 48px;
+      background-color: var(--bg-elevated);
+      border-radius: 14px;
+      padding: 0 14px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .routine-spec-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .routine-mini-box {
+      background-color: var(--bg-elevated);
+      border-radius: 14px;
+      height: 46px;
+      padding: 0 10px;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .routine-mini-input {
+      width: 38px;
+      text-align: right;
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .routine-add-submit {
+      height: 46px;
+      padding: 0 18px;
+      border-radius: 14px;
+      background-color: var(--accent-black);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .routine-add-submit:active {
+      background-color: var(--accent-dark);
+    }
+
+    .routine-item-card {
+      background-color: var(--bg-elevated);
+      border-radius: 16px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .routine-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .routine-order-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      background-color: var(--bg-surface);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .routine-item-info {
+      min-width: 0;
+    }
+
+    .routine-item-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-primary);
+      word-break: keep-all;
+    }
+
+    .routine-item-sub {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .routine-item-del {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      color: var(--text-tertiary);
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    .routine-item-del:active {
+      background-color: var(--bg-surface-strong);
+      color: var(--text-primary);
+    }
+
     /* 운동 시작 화면 */
     .workout-top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       margin-bottom: 14px;
+      gap: 8px;
+    }
+
+    .workout-top-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .load-routine-btn {
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 700;
+      padding: 9px 14px;
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .load-routine-btn:active {
+      background-color: var(--bg-surface-strong);
     }
 
     .finish-btn {
@@ -410,6 +600,26 @@
     .header-plus-btn:active {
       background-color: var(--accent-black);
       color: #FFFFFF;
+    }
+
+    .empty-workout-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 14px;
+    }
+
+    .inline-routine-cta {
+      background-color: var(--accent-black);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 11px 18px;
+      border-radius: 13px;
+      cursor: pointer;
+    }
+
+    .inline-routine-cta:active {
+      background-color: var(--accent-dark);
     }
 
     /* 개별 운동 종목 카드 */
@@ -623,7 +833,7 @@
       z-index: 25;
     }
 
-    /* 바텀 시트 (운동 종목 추가 및 폴더 관리) */
+    /* 바텀 시트 공통 */
     .sheet-backdrop {
       position: fixed;
       inset: 0;
@@ -687,6 +897,56 @@
       color: var(--text-tertiary);
       margin-bottom: 18px;
       padding-left: 4px;
+    }
+
+    /* 루틴 불러오기 바텀 시트 카드 */
+    .routine-load-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .routine-load-card {
+      width: 100%;
+      text-align: left;
+      background-color: var(--bg-surface);
+      border-radius: 18px;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    .routine-load-card:active {
+      background-color: var(--bg-surface-strong);
+    }
+
+    .routine-load-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .routine-load-preview {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+    }
+
+    .routine-load-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      background-color: var(--bg-elevated);
+      padding: 6px 11px;
+      border-radius: 10px;
+      flex-shrink: 0;
     }
 
     /* 폴더 헤더 & 인라인 생성 폼 */
@@ -995,7 +1255,7 @@
   <div id="toast" class="toast"></div>
 
   <main class="app-shell">
-    <!-- 1. 처음 시작화면 (달력 + 운동 시작 / 통계) -->
+    <!-- 1. 처음 시작화면 (달력 + 운동 시작 / 루틴 / 통계) -->
     <section id="view-home" class="view active">
       <header class="top-bar">
         <h1 class="page-title">운동 기록</h1>
@@ -1026,11 +1286,58 @@
 
       <div class="home-actions">
         <button type="button" id="btn-start-workout" class="btn-primary-large">운동 시작</button>
-        <button type="button" id="btn-open-stats" class="btn-secondary-large">통계</button>
+        <div class="home-sub-actions">
+          <button type="button" id="btn-open-routine" class="btn-secondary-large">루틴</button>
+          <button type="button" id="btn-open-stats" class="btn-secondary-large">통계</button>
+        </div>
       </div>
     </section>
 
-    <!-- 2. 운동 시작 화면 -->
+    <!-- 2. 루틴 관리 화면 (가슴 / 등 / 어깨 / 하체 / 팔) -->
+    <section id="view-routine" class="view">
+      <header class="top-bar">
+        <button type="button" id="btn-routine-back" class="icon-back-btn" aria-label="뒤로 가기">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <h1 class="page-title" style="font-size: 22px;">운동 루틴</h1>
+        <div style="width: 32px;"></div>
+      </header>
+
+      <div id="routine-split-tabs" class="routine-split-tabs"></div>
+
+      <div class="card">
+        <div class="summary-header">
+          <span id="routine-current-title" class="summary-date">가슴 루틴</span>
+          <span id="routine-current-count" class="summary-meta">0종목</span>
+        </div>
+        <div id="routine-items-list" class="summary-list"></div>
+
+        <div class="routine-add-form">
+          <div class="routine-input-row">
+            <input type="text" id="routine-ex-name" class="routine-text-input" placeholder="루틴에 넣을 운동 종목 입력" autocomplete="off" />
+          </div>
+          <div class="routine-spec-row">
+            <label class="routine-mini-box">
+              <input type="number" inputmode="numeric" id="routine-ex-sets" class="routine-mini-input" value="4" min="1" max="20" />
+              <span class="unit-label">set</span>
+            </label>
+            <label class="routine-mini-box">
+              <input type="number" inputmode="decimal" step="0.5" id="routine-ex-weight" class="routine-mini-input" value="20" />
+              <span class="unit-label">kg</span>
+            </label>
+            <label class="routine-mini-box">
+              <input type="number" inputmode="numeric" id="routine-ex-reps" class="routine-mini-input" value="12" />
+              <span class="unit-label">회</span>
+            </label>
+            <button type="button" id="btn-add-routine-item" class="routine-add-submit">추가</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 운동 시작 화면 -->
     <section id="view-workout" class="view">
       <div class="workout-top-bar">
         <button type="button" id="btn-workout-back" class="icon-back-btn" aria-label="뒤로 가기">
@@ -1038,7 +1345,10 @@
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
         </button>
-        <button type="button" id="btn-finish-workout" class="finish-btn">기록 저장</button>
+        <div class="workout-top-right">
+          <button type="button" id="btn-open-load-routine" class="load-routine-btn">루틴 불러오기</button>
+          <button type="button" id="btn-finish-workout" class="finish-btn">기록 저장</button>
+        </div>
       </div>
 
       <div id="workout-date-title" class="workout-date-banner">2026년 11월 26일 운동</div>
@@ -1055,7 +1365,7 @@
       </div>
     </section>
 
-    <!-- 3. 통계 화면 -->
+    <!-- 4. 통계 화면 -->
     <section id="view-stats" class="view">
       <header class="top-bar">
         <button type="button" id="btn-stats-back" class="icon-back-btn" aria-label="뒤로 가기">
@@ -1096,13 +1406,22 @@
     </section>
   </main>
 
+  <!-- 루틴 불러오기 바텀 시트 -->
+  <div id="load-routine-sheet" class="sheet-backdrop">
+    <div class="bottom-sheet">
+      <div class="sheet-handle"></div>
+      <h3 class="sheet-title">어떤 루틴을 불러올까요?</h3>
+      <div id="routine-load-list" class="routine-load-list"></div>
+    </div>
+  </div>
+
   <!-- 운동 종목 추가 바텀 시트 (폴더 기능 포함) -->
   <div id="add-exercise-sheet" class="sheet-backdrop">
     <div class="bottom-sheet">
       <div class="sheet-handle"></div>
       <h3 class="sheet-title">어떤 운동을 추가할까요?</h3>
       <input type="text" id="new-exercise-input" class="sheet-input" placeholder="운동 종목 이름 입력" autocomplete="off" />
-      <p id="save-target-hint" class="save-target-hint">입력 후 추가하면 내 종목 목록에 자동 저장돼요</p>
+      <p id="save-target-hint" class="save-target-hint">추가 시 내 종목 목록에 자동 저장돼요</p>
 
       <div class="folder-header-row">
         <span class="folder-section-label">내 종목 폴더</span>
@@ -1128,6 +1447,8 @@
     (function () {
       const STORAGE_KEY = 'minimal_workout_logs_v2';
       const LIBRARY_KEY = 'minimal_workout_library_v1';
+      const ROUTINE_KEY = 'minimal_workout_routines_v1';
+      const ROUTINE_SPLITS = ['가슴', '등', '어깨', '하체', '팔'];
 
       // 날짜 유틸리티 (YYYY-MM-DD)
       function toDateKey(date) {
@@ -1148,7 +1469,7 @@
         return `${m}:${s}`;
       }
 
-      // 사용자 폴더 및 저장된 종목 로드/저장 (초기 기본값 없음)
+      // 사용자 폴더 및 저장된 종목 로드/저장
       function loadLibrary() {
         const raw = localStorage.getItem(LIBRARY_KEY);
         if (raw) {
@@ -1168,7 +1489,32 @@
         localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
       }
 
-      // 운동 로그 로드/저장 (초기 기본 기록 없음)
+      // 부위별 루틴 로드/저장
+      function loadRoutines() {
+        const base = { '가슴': [], '등': [], '어깨': [], '하체': [], '팔': [] };
+        const raw = localStorage.getItem(ROUTINE_KEY);
+        if (raw) {
+          try {
+            const parsed = JSON.parse(raw);
+            if (parsed && typeof parsed === 'object') {
+              ROUTINE_SPLITS.forEach(split => {
+                if (Array.isArray(parsed[split])) {
+                  base[split] = parsed[split];
+                }
+              });
+              return base;
+            }
+          } catch (e) {}
+        }
+        localStorage.setItem(ROUTINE_KEY, JSON.stringify(base));
+        return base;
+      }
+
+      function saveRoutines(data) {
+        localStorage.setItem(ROUTINE_KEY, JSON.stringify(data));
+      }
+
+      // 운동 로그 로드/저장
       function loadLogs() {
         const raw = localStorage.getItem(STORAGE_KEY);
         if (raw) {
@@ -1189,7 +1535,9 @@
       const today = new Date();
       let logs = loadLogs();
       let library = loadLibrary();
-      let activeFolderId = 'ALL'; // 'ALL' 또는 특정 폴더 id
+      let routines = loadRoutines();
+      let activeSplit = '가슴';
+      let activeFolderId = 'ALL';
       let viewYear = today.getFullYear();
       let viewMonth = today.getMonth();
       let selectedDateKey = toDateKey(today);
@@ -1202,6 +1550,7 @@
       // DOM 참조
       const views = {
         home: document.getElementById('view-home'),
+        routine: document.getElementById('view-routine'),
         workout: document.getElementById('view-workout'),
         stats: document.getElementById('view-stats')
       };
@@ -1212,7 +1561,7 @@
         toastEl.textContent = msg;
         toastEl.classList.add('show');
         clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => toastEl.classList.remove('show'), 2000);
+        toastTimeout = setTimeout(() => toastEl.classList.remove('show'), 2200);
       }
 
       function switchView(name) {
@@ -1221,6 +1570,7 @@
         window.scrollTo(0, 0);
         if (name !== 'workout') stopTimer();
         if (name === 'home') renderHome();
+        if (name === 'routine') renderRoutineView();
         if (name === 'stats') renderStats();
       }
 
@@ -1333,7 +1683,103 @@
         renderHome();
       });
 
-      // ---------------- 2. 운동 시작 화면 ----------------
+      // ---------------- 2. 루틴 화면 ----------------
+      function renderRoutineView() {
+        const tabsEl = document.getElementById('routine-split-tabs');
+        tabsEl.innerHTML = '';
+
+        ROUTINE_SPLITS.forEach(split => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = `split-tab-btn ${activeSplit === split ? 'active' : ''}`;
+          btn.textContent = split;
+          btn.addEventListener('click', () => {
+            activeSplit = split;
+            renderRoutineView();
+          });
+          tabsEl.appendChild(btn);
+        });
+
+        const items = routines[activeSplit] || [];
+        document.getElementById('routine-current-title').textContent = `${activeSplit} 루틴`;
+        document.getElementById('routine-current-count').textContent = `${items.length}종목`;
+
+        const listEl = document.getElementById('routine-items-list');
+        listEl.innerHTML = '';
+
+        if (items.length === 0) {
+          const empty = document.createElement('p');
+          empty.className = 'empty-hint';
+          empty.textContent = `${activeSplit} 루틴에 등록된 운동이 없어요. 아래 입력창에서 종목을 추가해 보세요.`;
+          listEl.appendChild(empty);
+          return;
+        }
+
+        items.forEach((item, idx) => {
+          const card = document.createElement('div');
+          card.className = 'routine-item-card';
+          card.innerHTML = `
+            <div class="routine-item-left">
+              <span class="routine-order-num">${idx + 1}</span>
+              <div class="routine-item-info">
+                <div class="routine-item-title">${escapeHtml(item.name)}</div>
+                <div class="routine-item-sub">${item.defaultSets}set · ${item.defaultWeight}kg · ${item.defaultReps}회</div>
+              </div>
+            </div>
+            <button type="button" class="routine-item-del" data-idx="${idx}" aria-label="루틴 종목 삭제">×</button>
+          `;
+          listEl.appendChild(card);
+        });
+      }
+
+      document.getElementById('routine-items-list').addEventListener('click', (e) => {
+        const delBtn = e.target.closest('.routine-item-del');
+        if (delBtn) {
+          const idx = Number(delBtn.dataset.idx);
+          const removed = routines[activeSplit][idx];
+          routines[activeSplit].splice(idx, 1);
+          saveRoutines(routines);
+          renderRoutineView();
+          if (removed) showToast(`'${removed.name}' 삭제됨`);
+        }
+      });
+
+      function addRoutineItem() {
+        const nameInput = document.getElementById('routine-ex-name');
+        const setsInput = document.getElementById('routine-ex-sets');
+        const weightInput = document.getElementById('routine-ex-weight');
+        const repsInput = document.getElementById('routine-ex-reps');
+
+        const name = nameInput.value.trim();
+        if (!name) {
+          showToast('운동 종목 이름을 입력해 주세요');
+          nameInput.focus();
+          return;
+        }
+
+        const defaultSets = Math.max(1, Math.min(20, Number(setsInput.value) || 3));
+        const defaultWeight = Math.max(0, Number(weightInput.value) || 0);
+        const defaultReps = Math.max(1, Number(repsInput.value) || 10);
+
+        routines[activeSplit].push({
+          id: 'rt-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
+          name,
+          defaultSets,
+          defaultWeight,
+          defaultReps
+        });
+        saveRoutines(routines);
+        nameInput.value = '';
+        renderRoutineView();
+        showToast(`${activeSplit} 루틴에 '${name}' 추가됨`);
+      }
+
+      document.getElementById('btn-add-routine-item').addEventListener('click', addRoutineItem);
+      document.getElementById('routine-ex-name').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') addRoutineItem();
+      });
+
+      // ---------------- 3. 운동 시작 화면 ----------------
       function getPreviousRecordText(exerciseName) {
         const sortedDates = Object.keys(logs)
           .filter(k => k < selectedDateKey && Array.isArray(logs[k]))
@@ -1361,7 +1807,6 @@
         if (existing && existing.length > 0) {
           activeExercises = JSON.parse(JSON.stringify(existing));
         } else {
-          // 기본 종목 없이 빈 상태로 시작
           activeExercises = [];
         }
 
@@ -1405,7 +1850,14 @@
         if (activeExercises.length === 0) {
           const emptyCard = document.createElement('div');
           emptyCard.className = 'card';
-          emptyCard.innerHTML = `<p class="empty-hint" style="text-align:center; padding: 24px 0;">아직 추가된 운동 종목이 없어요.<br>하단의 <strong>+ 운동 종목 추가</strong> 버튼을 눌러 시작해 보세요.</p>`;
+          emptyCard.innerHTML = `
+            <p class="empty-hint" style="text-align:center; padding: 14px 0 4px;">
+              아직 추가된 운동 종목이 없어요.<br>저장된 루틴을 불러오거나 아래에서 종목을 추가해 주세요.
+            </p>
+            <div class="empty-workout-actions">
+              <button type="button" class="inline-routine-cta" data-action="quick-load-routine">루틴 불러오기</button>
+            </div>
+          `;
           container.appendChild(emptyCard);
           return;
         }
@@ -1458,6 +1910,11 @@
 
       // 운동 카드 내 이벤트 위임
       document.getElementById('exercise-cards-container').addEventListener('click', (e) => {
+        if (e.target.closest('[data-action="quick-load-routine"]')) {
+          openLoadRoutineSheet();
+          return;
+        }
+
         const timerBtn = e.target.closest('[data-action="toggle-timer"]');
         if (timerBtn) {
           toggleExerciseTimer(timerBtn.dataset.id);
@@ -1515,6 +1972,69 @@
         }
       });
 
+      // ---------------- 루틴 불러오기 바텀 시트 ----------------
+      const loadRoutineBackdrop = document.getElementById('load-routine-sheet');
+      const routineLoadListEl = document.getElementById('routine-load-list');
+
+      function openLoadRoutineSheet() {
+        routineLoadListEl.innerHTML = '';
+
+        ROUTINE_SPLITS.forEach(split => {
+          const items = routines[split] || [];
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'routine-load-card';
+
+          const previewText = items.length > 0
+            ? items.map(x => x.name).join(' · ')
+            : '등록된 종목 없음';
+
+          btn.innerHTML = `
+            <div>
+              <div class="routine-load-name">${split}</div>
+              <div class="routine-load-preview">${escapeHtml(previewText)}</div>
+            </div>
+            <span class="routine-load-badge">${items.length}종목</span>
+          `;
+
+          btn.addEventListener('click', () => {
+            if (items.length === 0) {
+              showToast(`'${split}' 루틴이 비어 있어요. 홈의 루틴에서 종목을 추가해 주세요`);
+              return;
+            }
+            items.forEach((rtItem, idx) => {
+              const setsArr = Array.from({ length: rtItem.defaultSets || 3 }, () => ({
+                weight: rtItem.defaultWeight ?? 20,
+                reps: rtItem.defaultReps ?? 12,
+                completed: false
+              }));
+              activeExercises.push({
+                id: 'ex-' + Date.now() + '-' + idx + '-' + Math.random().toString(36).slice(2, 5),
+                name: rtItem.name,
+                elapsedSeconds: 0,
+                sets: setsArr
+              });
+            });
+            closeLoadRoutineSheet();
+            renderWorkoutCards();
+            showToast(`'${split}' 루틴 ${items.length}종목을 불러왔어요`);
+          });
+
+          routineLoadListEl.appendChild(btn);
+        });
+
+        loadRoutineBackdrop.classList.add('open');
+      }
+
+      function closeLoadRoutineSheet() {
+        loadRoutineBackdrop.classList.remove('open');
+      }
+
+      document.getElementById('btn-open-load-routine').addEventListener('click', openLoadRoutineSheet);
+      loadRoutineBackdrop.addEventListener('click', (e) => {
+        if (e.target === loadRoutineBackdrop) closeLoadRoutineSheet();
+      });
+
       // ---------------- 종목 추가 & 폴더 관리 바텀 시트 ----------------
       const sheetBackdrop = document.getElementById('add-exercise-sheet');
       const newExInput = document.getElementById('new-exercise-input');
@@ -1525,12 +2045,10 @@
       const presetChipsContainer = document.getElementById('preset-chips');
 
       function renderFolderUI() {
-        // 선택된 폴더가 삭제되었을 경우 ALL로 복귀
         if (activeFolderId !== 'ALL' && !library.folders.some(f => f.id === activeFolderId)) {
           activeFolderId = 'ALL';
         }
 
-        // 저장 위치 안내 문구 업데이트
         const currentFolder = library.folders.find(f => f.id === activeFolderId);
         if (currentFolder) {
           saveTargetHint.textContent = `추가 시 '${currentFolder.name}' 폴더에도 자동 저장돼요`;
@@ -1538,7 +2056,6 @@
           saveTargetHint.textContent = '추가 시 내 종목 목록에 자동 저장돼요';
         }
 
-        // 폴더 탭 렌더링
         folderTabsContainer.innerHTML = '';
 
         const allWrap = document.createElement('div');
@@ -1587,7 +2104,6 @@
           folderTabsContainer.appendChild(wrap);
         });
 
-        // 현재 탭에 해당하는 운동 종목 목록 렌더링
         presetChipsContainer.innerHTML = '';
         const visibleItems = activeFolderId === 'ALL'
           ? library.items
@@ -1755,7 +2271,7 @@
         switchView('home');
       });
 
-      // ---------------- 3. 통계 화면 ----------------
+      // ---------------- 4. 통계 화면 ----------------
       function renderStats() {
         const monthPrefix = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-`;
         const allKeys = Object.keys(logs).filter(k => Array.isArray(logs[k]) && logs[k].length > 0);
@@ -1781,7 +2297,6 @@
         document.getElementById('stat-month-days').textContent = thisMonthDays;
         document.getElementById('stat-total-volume').textContent = totalVolume.toLocaleString();
 
-        // 최근 6주 주간 운동 횟수 막대 그래프
         const chartEl = document.getElementById('weekly-bar-chart');
         chartEl.innerHTML = '';
         const weeks = [];
@@ -1809,7 +2324,6 @@
           chartEl.appendChild(col);
         });
 
-        // 종목별 최고 중량
         const prListEl = document.getElementById('pr-list-container');
         prListEl.innerHTML = '';
         const prEntries = Object.entries(prMap).sort((a, b) => b[1].weight - a[1].weight);
@@ -1834,7 +2348,9 @@
 
       // 네비게이션 연결
       document.getElementById('btn-start-workout').addEventListener('click', openWorkoutView);
+      document.getElementById('btn-open-routine').addEventListener('click', () => switchView('routine'));
       document.getElementById('btn-open-stats').addEventListener('click', () => switchView('stats'));
+      document.getElementById('btn-routine-back').addEventListener('click', () => switchView('home'));
       document.getElementById('btn-workout-back').addEventListener('click', () => switchView('home'));
       document.getElementById('btn-stats-back').addEventListener('click', () => switchView('home'));
 
