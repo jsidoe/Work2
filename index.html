@@ -262,6 +262,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
+    }
+
+    .summary-item-left {
+      min-width: 0;
     }
 
     .summary-item-name {
@@ -270,10 +275,20 @@
       color: var(--text-primary);
     }
 
+    .summary-item-memo {
+      font-size: 12px;
+      color: var(--text-tertiary);
+      margin-top: 3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .summary-item-detail {
       font-size: 13px;
       font-weight: 600;
       color: var(--text-secondary);
+      flex-shrink: 0;
     }
 
     .empty-hint {
@@ -283,7 +298,7 @@
       line-height: 1.5;
     }
 
-    /* 홈 하단 액션 버튼 영역 (운동 시작 + 루틴/통계) */
+    /* 홈 하단 액션 버튼 영역 */
     .home-actions {
       position: fixed;
       left: 50%;
@@ -376,85 +391,52 @@
       color: #FFFFFF;
     }
 
-    .routine-add-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .routine-input-row {
+    .routine-add-bar {
       display: flex;
       gap: 8px;
+      margin-bottom: 16px;
     }
 
     .routine-text-input {
       flex: 1;
-      height: 48px;
-      background-color: var(--bg-elevated);
-      border-radius: 14px;
-      padding: 0 14px;
+      height: 50px;
+      background-color: var(--bg-surface);
+      border-radius: 16px;
+      padding: 0 16px;
       font-size: 15px;
       font-weight: 600;
       color: var(--text-primary);
     }
 
-    .routine-spec-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr auto;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .routine-mini-box {
-      background-color: var(--bg-elevated);
-      border-radius: 14px;
-      height: 46px;
-      padding: 0 10px;
-      display: flex;
-      align-items: baseline;
-      justify-content: center;
-      gap: 3px;
-    }
-
-    .routine-mini-input {
-      width: 38px;
-      text-align: right;
-      font-size: 17px;
-      font-weight: 800;
-      color: var(--text-primary);
-    }
-
     .routine-add-submit {
-      height: 46px;
-      padding: 0 18px;
-      border-radius: 14px;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 16px;
       background-color: var(--accent-black);
       color: #FFFFFF;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .routine-add-submit:active {
       background-color: var(--accent-dark);
     }
 
-    .routine-item-card {
-      background-color: var(--bg-elevated);
-      border-radius: 16px;
-      padding: 14px 16px;
+    .routine-card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
+      margin-bottom: 12px;
     }
 
-    .routine-item-left {
+    .routine-card-title-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 9px;
       min-width: 0;
       flex: 1;
     }
@@ -463,7 +445,7 @@
       width: 24px;
       height: 24px;
       border-radius: 8px;
-      background-color: var(--bg-surface);
+      background-color: var(--bg-elevated);
       color: var(--text-secondary);
       font-size: 12px;
       font-weight: 800;
@@ -471,43 +453,6 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
-
-    .routine-item-info {
-      min-width: 0;
-    }
-
-    .routine-item-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text-primary);
-      word-break: keep-all;
-    }
-
-    .routine-item-sub {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--text-tertiary);
-      margin-top: 2px;
-    }
-
-    .routine-item-del {
-      width: 32px;
-      height: 32px;
-      border-radius: 10px;
-      color: var(--text-tertiary);
-      font-size: 18px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      cursor: pointer;
-    }
-
-    .routine-item-del:active {
-      background-color: var(--bg-surface-strong);
-      color: var(--text-primary);
     }
 
     /* 운동 시작 화면 */
@@ -556,39 +501,39 @@
     .workout-date-banner {
       background-color: var(--bg-surface);
       border-radius: 18px;
-      padding: 16px 20px;
+      padding: 15px 20px;
       text-align: center;
       font-size: 18px;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--text-primary);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .workout-column-header {
       background-color: var(--bg-surface);
       border-radius: 16px;
-      padding: 12px 18px;
+      padding: 11px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .column-labels {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary);
       letter-spacing: -0.01em;
     }
 
     .header-plus-btn {
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       border: 1.8px solid var(--text-primary);
       color: var(--text-primary);
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -622,12 +567,12 @@
       background-color: var(--accent-dark);
     }
 
-    /* 개별 운동 종목 카드 */
+    /* 개별 운동 종목 카드 (운동 시작 & 루틴 공용) */
     .exercise-card {
       background-color: var(--bg-surface);
-      border-radius: 24px;
-      padding: 22px 20px;
-      margin-bottom: 16px;
+      border-radius: 22px;
+      padding: 18px 16px;
+      margin-bottom: 14px;
     }
 
     .exercise-overview {
@@ -635,11 +580,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .exercise-title {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.02em;
@@ -651,29 +596,29 @@
     .exercise-metrics {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-shrink: 0;
     }
 
     .set-count-pill {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary);
       background-color: var(--bg-elevated);
-      padding: 5px 10px;
-      border-radius: 10px;
+      padding: 4px 9px;
+      border-radius: 9px;
     }
 
     .timer-pill {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-primary);
       background-color: var(--bg-elevated);
-      padding: 5px 10px;
-      border-radius: 10px;
+      padding: 4px 9px;
+      border-radius: 9px;
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       cursor: pointer;
     }
 
@@ -683,28 +628,28 @@
     }
 
     .prev-record-hint {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-tertiary);
       font-weight: 500;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
-    /* 세트 행 리스트 */
+    /* 컴팩트 세트 행 리스트 */
     .sets-container {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
     }
 
     .set-row {
       background-color: var(--bg-elevated);
-      border-radius: 16px;
-      padding: 11px 12px;
+      border-radius: 12px;
+      padding: 7px 10px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
-      transition: opacity 0.15s;
+      transition: background-color 0.15s;
     }
 
     .set-row.completed {
@@ -712,10 +657,10 @@
     }
 
     .set-index {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       color: var(--text-tertiary);
-      width: 34px;
+      width: 32px;
       flex-shrink: 0;
     }
 
@@ -728,8 +673,8 @@
       align-items: baseline;
       gap: 2px;
       background-color: var(--bg-surface);
-      padding: 6px 8px;
-      border-radius: 12px;
+      padding: 4px 8px;
+      border-radius: 9px;
       flex: 1;
       min-width: 0;
       justify-content: center;
@@ -740,27 +685,27 @@
     }
 
     .big-number-input {
-      width: 46px;
+      width: 40px;
       text-align: right;
-      font-size: 21px;
+      font-size: 16px;
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.02em;
     }
 
     .unit-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       color: var(--text-tertiary);
     }
 
     .set-check-btn {
-      width: 34px;
-      height: 34px;
-      border-radius: 11px;
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
       background-color: var(--bg-surface);
       color: var(--text-tertiary);
-      font-size: 15px;
+      font-size: 13px;
       font-weight: 800;
       display: flex;
       align-items: center;
@@ -775,11 +720,11 @@
     }
 
     .set-del-btn {
-      width: 28px;
-      height: 34px;
-      border-radius: 9px;
+      width: 24px;
+      height: 28px;
+      border-radius: 8px;
       color: var(--text-tertiary);
-      font-size: 17px;
+      font-size: 15px;
       font-weight: 600;
       display: flex;
       align-items: center;
@@ -793,20 +738,45 @@
       color: var(--text-primary);
     }
 
+    /* 운동별 간단 메모 칸 */
+    .exercise-memo-wrap {
+      margin-top: 8px;
+    }
+
+    .exercise-memo-input {
+      width: 100%;
+      height: 36px;
+      background-color: var(--bg-elevated);
+      border-radius: 10px;
+      padding: 0 12px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .exercise-memo-input::placeholder {
+      color: var(--text-tertiary);
+    }
+
+    .exercise-memo-input:focus {
+      box-shadow: inset 0 0 0 1.5px var(--accent-black);
+      color: var(--text-primary);
+    }
+
     .card-footer-actions {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-top: 14px;
-      padding-top: 4px;
+      margin-top: 10px;
+      padding-top: 2px;
     }
 
     .text-action-btn {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       color: var(--text-secondary);
-      padding: 6px 10px;
-      border-radius: 10px;
+      padding: 5px 8px;
+      border-radius: 9px;
       cursor: pointer;
     }
 
@@ -817,7 +787,7 @@
     .text-action-btn.muted {
       color: var(--text-tertiary);
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     /* 최하단 고정 '운동 종목 추가' 버튼 */
@@ -1293,7 +1263,7 @@
       </div>
     </section>
 
-    <!-- 2. 루틴 관리 화면 (가슴 / 등 / 어깨 / 하체 / 팔) -->
+    <!-- 2. 루틴 관리 화면 (가슴 / 등 / 어깨 / 하체 / 팔 - 세트별 무게·횟수 설정) -->
     <section id="view-routine" class="view">
       <header class="top-bar">
         <button type="button" id="btn-routine-back" class="icon-back-btn" aria-label="뒤로 가기">
@@ -1302,39 +1272,17 @@
           </svg>
         </button>
         <h1 class="page-title" style="font-size: 22px;">운동 루틴</h1>
-        <div style="width: 32px;"></div>
+        <span id="routine-current-count" class="pill-badge">0종목</span>
       </header>
 
       <div id="routine-split-tabs" class="routine-split-tabs"></div>
 
-      <div class="card">
-        <div class="summary-header">
-          <span id="routine-current-title" class="summary-date">가슴 루틴</span>
-          <span id="routine-current-count" class="summary-meta">0종목</span>
-        </div>
-        <div id="routine-items-list" class="summary-list"></div>
-
-        <div class="routine-add-form">
-          <div class="routine-input-row">
-            <input type="text" id="routine-ex-name" class="routine-text-input" placeholder="루틴에 넣을 운동 종목 입력" autocomplete="off" />
-          </div>
-          <div class="routine-spec-row">
-            <label class="routine-mini-box">
-              <input type="number" inputmode="numeric" id="routine-ex-sets" class="routine-mini-input" value="4" min="1" max="20" />
-              <span class="unit-label">set</span>
-            </label>
-            <label class="routine-mini-box">
-              <input type="number" inputmode="decimal" step="0.5" id="routine-ex-weight" class="routine-mini-input" value="20" />
-              <span class="unit-label">kg</span>
-            </label>
-            <label class="routine-mini-box">
-              <input type="number" inputmode="numeric" id="routine-ex-reps" class="routine-mini-input" value="12" />
-              <span class="unit-label">회</span>
-            </label>
-            <button type="button" id="btn-add-routine-item" class="routine-add-submit">추가</button>
-          </div>
-        </div>
+      <div class="routine-add-bar">
+        <input type="text" id="routine-ex-name" class="routine-text-input" placeholder="루틴에 추가할 운동 종목 이름" autocomplete="off" />
+        <button type="button" id="btn-add-routine-item" class="routine-add-submit">추가</button>
       </div>
+
+      <div id="routine-items-list"></div>
     </section>
 
     <!-- 3. 운동 시작 화면 -->
@@ -1489,7 +1437,7 @@
         localStorage.setItem(LIBRARY_KEY, JSON.stringify(lib));
       }
 
-      // 부위별 루틴 로드/저장
+      // 부위별 루틴 로드/저장 (기존 단일 설정 구조 자동 마이그레이션 포함)
       function loadRoutines() {
         const base = { '가슴': [], '등': [], '어깨': [], '하체': [], '팔': [] };
         const raw = localStorage.getItem(ROUTINE_KEY);
@@ -1497,11 +1445,26 @@
           try {
             const parsed = JSON.parse(raw);
             if (parsed && typeof parsed === 'object') {
+              let migrated = false;
               ROUTINE_SPLITS.forEach(split => {
                 if (Array.isArray(parsed[split])) {
-                  base[split] = parsed[split];
+                  base[split] = parsed[split].map(item => {
+                    if (Array.isArray(item.sets) && item.sets.length > 0) {
+                      return item;
+                    }
+                    migrated = true;
+                    const count = Math.max(1, Number(item.defaultSets) || 3);
+                    const w = Number(item.defaultWeight) ?? 20;
+                    const r = Number(item.defaultReps) || 12;
+                    return {
+                      id: item.id || ('rt-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6)),
+                      name: item.name,
+                      sets: Array.from({ length: count }, () => ({ weight: w, reps: r }))
+                    };
+                  });
                 }
               });
+              if (migrated) saveRoutines(base);
               return base;
             }
           } catch (e) {}
@@ -1656,8 +1619,15 @@
             item.className = 'summary-item';
 
             const maxWeight = ex.sets.reduce((m, s) => Math.max(m, Number(s.weight) || 0), 0);
+            const memoHtml = ex.memo && ex.memo.trim()
+              ? `<div class="summary-item-memo">${escapeHtml(ex.memo.trim())}</div>`
+              : '';
+
             item.innerHTML = `
-              <span class="summary-item-name">${escapeHtml(ex.name)}</span>
+              <div class="summary-item-left">
+                <div class="summary-item-name">${escapeHtml(ex.name)}</div>
+                ${memoHtml}
+              </div>
               <span class="summary-item-detail">${ex.sets.length}set · 최고 ${maxWeight}kg · ${formatSeconds(ex.elapsedSeconds || 0)}</span>
             `;
             listEl.appendChild(item);
@@ -1683,7 +1653,7 @@
         renderHome();
       });
 
-      // ---------------- 2. 루틴 화면 ----------------
+      // ---------------- 2. 루틴 화면 (세트별 무게·횟수 설정) ----------------
       function renderRoutineView() {
         const tabsEl = document.getElementById('routine-split-tabs');
         tabsEl.innerHTML = '';
@@ -1701,55 +1671,106 @@
         });
 
         const items = routines[activeSplit] || [];
-        document.getElementById('routine-current-title').textContent = `${activeSplit} 루틴`;
-        document.getElementById('routine-current-count').textContent = `${items.length}종목`;
+        document.getElementById('routine-current-count').textContent = `${activeSplit} ${items.length}종목`;
 
         const listEl = document.getElementById('routine-items-list');
         listEl.innerHTML = '';
 
         if (items.length === 0) {
-          const empty = document.createElement('p');
-          empty.className = 'empty-hint';
-          empty.textContent = `${activeSplit} 루틴에 등록된 운동이 없어요. 아래 입력창에서 종목을 추가해 보세요.`;
-          listEl.appendChild(empty);
+          const emptyCard = document.createElement('div');
+          emptyCard.className = 'card';
+          emptyCard.innerHTML = `<p class="empty-hint" style="text-align:center; padding: 16px 0;">${activeSplit} 루틴에 등록된 운동이 없어요.<br>위 입력창에서 종목을 추가한 뒤 세트별 무게와 횟수를 설정해 보세요.</p>`;
+          listEl.appendChild(emptyCard);
           return;
         }
 
-        items.forEach((item, idx) => {
-          const card = document.createElement('div');
-          card.className = 'routine-item-card';
+        items.forEach((item, exIdx) => {
+          const card = document.createElement('article');
+          card.className = 'exercise-card';
+
           card.innerHTML = `
-            <div class="routine-item-left">
-              <span class="routine-order-num">${idx + 1}</span>
-              <div class="routine-item-info">
-                <div class="routine-item-title">${escapeHtml(item.name)}</div>
-                <div class="routine-item-sub">${item.defaultSets}set · ${item.defaultWeight}kg · ${item.defaultReps}회</div>
+            <div class="routine-card-header">
+              <div class="routine-card-title-wrap">
+                <span class="routine-order-num">${exIdx + 1}</span>
+                <h3 class="exercise-title">${escapeHtml(item.name)}</h3>
               </div>
+              <span class="set-count-pill">${item.sets.length}set</span>
             </div>
-            <button type="button" class="routine-item-del" data-idx="${idx}" aria-label="루틴 종목 삭제">×</button>
+            <div class="sets-container">
+              ${item.sets.map((s, sIdx) => `
+                <div class="set-row">
+                  <span class="set-index">${sIdx + 1}세트</span>
+                  <label class="metric-input-group">
+                    <input type="number" inputmode="decimal" step="0.5" class="big-number-input" value="${s.weight}" data-rt-ex="${exIdx}" data-rt-set="${sIdx}" data-rt-field="weight" />
+                    <span class="unit-label">kg</span>
+                  </label>
+                  <label class="metric-input-group">
+                    <input type="number" inputmode="numeric" class="big-number-input" value="${s.reps}" data-rt-ex="${exIdx}" data-rt-set="${sIdx}" data-rt-field="reps" />
+                    <span class="unit-label">회</span>
+                  </label>
+                  <button type="button" class="set-del-btn" data-rt-action="remove-set" data-rt-ex="${exIdx}" data-rt-set="${sIdx}" aria-label="세트 삭제">×</button>
+                </div>
+              `).join('')}
+            </div>
+            <div class="card-footer-actions">
+              <button type="button" class="text-action-btn" data-rt-action="add-set" data-rt-ex="${exIdx}">+ 세트 추가</button>
+              <button type="button" class="text-action-btn muted" data-rt-action="remove-exercise" data-rt-ex="${exIdx}">종목 삭제</button>
+            </div>
           `;
+
           listEl.appendChild(card);
         });
       }
 
       document.getElementById('routine-items-list').addEventListener('click', (e) => {
-        const delBtn = e.target.closest('.routine-item-del');
-        if (delBtn) {
-          const idx = Number(delBtn.dataset.idx);
-          const removed = routines[activeSplit][idx];
-          routines[activeSplit].splice(idx, 1);
+        const addSetBtn = e.target.closest('[data-rt-action="add-set"]');
+        if (addSetBtn) {
+          const exIdx = Number(addSetBtn.dataset.rtEx);
+          const sets = routines[activeSplit][exIdx].sets;
+          const last = sets[sets.length - 1] || { weight: 20, reps: 12 };
+          sets.push({ weight: last.weight, reps: last.reps });
+          saveRoutines(routines);
+          renderRoutineView();
+          return;
+        }
+
+        const removeSetBtn = e.target.closest('[data-rt-action="remove-set"]');
+        if (removeSetBtn) {
+          const exIdx = Number(removeSetBtn.dataset.rtEx);
+          const setIdx = Number(removeSetBtn.dataset.rtSet);
+          if (routines[activeSplit][exIdx].sets.length <= 1) {
+            showToast('최소 1세트는 유지해야 해요');
+            return;
+          }
+          routines[activeSplit][exIdx].sets.splice(setIdx, 1);
+          saveRoutines(routines);
+          renderRoutineView();
+          return;
+        }
+
+        const removeExBtn = e.target.closest('[data-rt-action="remove-exercise"]');
+        if (removeExBtn) {
+          const exIdx = Number(removeExBtn.dataset.rtEx);
+          const removed = routines[activeSplit][exIdx];
+          routines[activeSplit].splice(exIdx, 1);
           saveRoutines(routines);
           renderRoutineView();
           if (removed) showToast(`'${removed.name}' 삭제됨`);
         }
       });
 
+      document.getElementById('routine-items-list').addEventListener('input', (e) => {
+        if (e.target.hasAttribute('data-rt-field')) {
+          const exIdx = Number(e.target.dataset.rtEx);
+          const setIdx = Number(e.target.dataset.rtSet);
+          const field = e.target.dataset.rtField;
+          routines[activeSplit][exIdx].sets[setIdx][field] = Number(e.target.value) || 0;
+          saveRoutines(routines);
+        }
+      });
+
       function addRoutineItem() {
         const nameInput = document.getElementById('routine-ex-name');
-        const setsInput = document.getElementById('routine-ex-sets');
-        const weightInput = document.getElementById('routine-ex-weight');
-        const repsInput = document.getElementById('routine-ex-reps');
-
         const name = nameInput.value.trim();
         if (!name) {
           showToast('운동 종목 이름을 입력해 주세요');
@@ -1757,16 +1778,14 @@
           return;
         }
 
-        const defaultSets = Math.max(1, Math.min(20, Number(setsInput.value) || 3));
-        const defaultWeight = Math.max(0, Number(weightInput.value) || 0);
-        const defaultReps = Math.max(1, Number(repsInput.value) || 10);
-
         routines[activeSplit].push({
           id: 'rt-' + Date.now() + '-' + Math.random().toString(36).slice(2, 6),
           name,
-          defaultSets,
-          defaultWeight,
-          defaultReps
+          sets: [
+            { weight: 20, reps: 12 },
+            { weight: 20, reps: 12 },
+            { weight: 20, reps: 12 }
+          ]
         });
         saveRoutines(routines);
         nameInput.value = '';
@@ -1868,6 +1887,7 @@
 
           const isRunning = runningTimerId === ex.id;
           const prevHint = getPreviousRecordText(ex.name);
+          const memoVal = ex.memo || '';
 
           card.innerHTML = `
             <div class="exercise-overview">
@@ -1897,6 +1917,9 @@
                   <button type="button" class="set-del-btn" data-action="remove-set" data-ex="${exIdx}" data-set="${sIdx}" aria-label="세트 삭제">×</button>
                 </div>
               `).join('')}
+            </div>
+            <div class="exercise-memo-wrap">
+              <input type="text" class="exercise-memo-input" placeholder="메모 입력 (그립, 자극 포인트, 머신 세팅 등)" value="${escapeHtml(memoVal)}" data-ex="${exIdx}" data-action="edit-memo" autocomplete="off" />
             </div>
             <div class="card-footer-actions">
               <button type="button" class="text-action-btn" data-action="add-set" data-ex="${exIdx}">+ 세트 추가</button>
@@ -1969,6 +1992,12 @@
           const setIdx = Number(e.target.dataset.set);
           const field = e.target.dataset.field;
           activeExercises[exIdx].sets[setIdx][field] = Number(e.target.value) || 0;
+          return;
+        }
+
+        if (e.target.dataset.action === 'edit-memo') {
+          const exIdx = Number(e.target.dataset.ex);
+          activeExercises[exIdx].memo = e.target.value;
         }
       });
 
@@ -1986,7 +2015,7 @@
           btn.className = 'routine-load-card';
 
           const previewText = items.length > 0
-            ? items.map(x => x.name).join(' · ')
+            ? items.map(x => `${x.name} (${x.sets.length}set)`).join(' · ')
             : '등록된 종목 없음';
 
           btn.innerHTML = `
@@ -2003,15 +2032,16 @@
               return;
             }
             items.forEach((rtItem, idx) => {
-              const setsArr = Array.from({ length: rtItem.defaultSets || 3 }, () => ({
-                weight: rtItem.defaultWeight ?? 20,
-                reps: rtItem.defaultReps ?? 12,
+              const setsArr = rtItem.sets.map(s => ({
+                weight: Number(s.weight) || 0,
+                reps: Number(s.reps) || 0,
                 completed: false
               }));
               activeExercises.push({
                 id: 'ex-' + Date.now() + '-' + idx + '-' + Math.random().toString(36).slice(2, 5),
                 name: rtItem.name,
                 elapsedSeconds: 0,
+                memo: '',
                 sets: setsArr
               });
             });
@@ -2220,6 +2250,7 @@
           id: 'ex-' + Date.now(),
           name: trimmed,
           elapsedSeconds: 0,
+          memo: '',
           sets: [
             { weight: 20, reps: 12, completed: false },
             { weight: 20, reps: 12, completed: false },
