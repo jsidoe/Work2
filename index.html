@@ -9,6 +9,8 @@
   <meta name="apple-mobile-web-app-title" content="운동 기록" />
   <link rel="icon" type="image/png" href="icon.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="icon.png" />
+  <title>운동 기록</title>
+  <style>
     :root, [data-theme="mono"] {
       --bg-page: #FFFFFF;
       --bg-surface: #F6F7F9;
@@ -1910,10 +1912,10 @@
       const ROUTINE_SPLITS = ['가슴', '등', '어깨', '하체', '팔'];
 
       const THEMES = [
-        { id: 'mono', name: '모노크롬', sub: '검정 · 화이트', color: '#111111', iconBg: '#000000' },
-        { id: 'blue', name: '토스 블루', sub: '블루 포인트', color: '#3182F6', iconBg: '#3182F6' },
-        { id: 'red', name: '크림슨 레드', sub: '레드 포인트', color: '#F04452', iconBg: '#F04452' },
-        { id: 'brown', name: '에스프레소', sub: '브라운 포인트', color: '#7C5841', iconBg: '#7C5841' }
+        { id: 'mono', name: '모노크롬', sub: '검정 · 화이트', color: '#111111' },
+        { id: 'blue', name: '토스 블루', sub: '블루 포인트', color: '#3182F6' },
+        { id: 'red', name: '크림슨 레드', sub: '레드 포인트', color: '#F04452' },
+        { id: 'brown', name: '에스프레소', sub: '브라운 포인트', color: '#7C5841' }
       ];
 
       const DEFAULT_SETTINGS = {
@@ -1944,55 +1946,9 @@
 
       let settings = loadSettings();
 
-      // 테마 및 동적 아이콘 적용
       function applyTheme(themeId) {
         const themeObj = THEMES.find(t => t.id === themeId) || THEMES[0];
         document.documentElement.setAttribute('data-theme', themeObj.id);
-        initAppIcons(themeObj.iconBg);
-      }
-
-      function initAppIcons(bgColor = '#000000') {
-        try {
-          const canvas = document.createElement('canvas');
-          canvas.width = 512;
-          canvas.height = 512;
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return;
-
-          ctx.fillStyle = bgColor;
-          ctx.fillRect(0, 0, 512, 512);
-
-          function fillRoundRect(x, y, w, h, r) {
-            ctx.beginPath();
-            ctx.moveTo(x + r, y);
-            ctx.arcTo(x + w, y, x + w, y + h, r);
-            ctx.arcTo(x + w, y + h, x, y + h, r);
-            ctx.arcTo(x, y + h, x, y, r);
-            ctx.arcTo(x, y, x + w, y, r);
-            ctx.closePath();
-            ctx.fill();
-          }
-
-          ctx.fillStyle = '#FFFFFF';
-          fillRoundRect(162, 242, 188, 28, 6);
-          fillRoundRect(122, 170, 26, 172, 8);
-          fillRoundRect(84, 196, 24, 120, 7);
-          fillRoundRect(54, 224, 18, 64, 6);
-          fillRoundRect(42, 244, 14, 24, 5);
-          fillRoundRect(364, 170, 26, 172, 8);
-          fillRoundRect(404, 196, 24, 120, 7);
-          fillRoundRect(440, 224, 18, 64, 6);
-          fillRoundRect(456, 244, 14, 24, 5);
-
-          const pngUrl = canvas.toDataURL('image/png');
-          const appleIcon = document.getElementById('apple-touch-icon');
-          const favIcon = document.getElementById('favicon-icon');
-          if (appleIcon) appleIcon.href = pngUrl;
-          if (favIcon) {
-            favIcon.type = 'image/png';
-            favIcon.href = pngUrl;
-          }
-        } catch (e) {}
       }
 
       applyTheme(settings.theme);
@@ -3134,7 +3090,6 @@
         const currentThemeObj = THEMES.find(t => t.id === settings.theme) || THEMES[0];
         document.getElementById('settings-theme-badge').textContent = currentThemeObj.name;
 
-        // 테마 옵션 카드
         const themeGrid = document.getElementById('theme-options-grid');
         themeGrid.innerHTML = '';
         THEMES.forEach(t => {
@@ -3161,12 +3116,10 @@
           themeGrid.appendChild(btn);
         });
 
-        // 스테퍼 값 업데이트
         document.getElementById('val-defaultSets').textContent = `${settings.defaultSets}세트`;
         document.getElementById('val-defaultWeight').textContent = `${settings.defaultWeight}kg`;
         document.getElementById('val-defaultReps').textContent = `${settings.defaultReps}회`;
 
-        // 무게 증감 단위 세그먼트
         const stepOptions = [0.5, 1, 2.5, 5];
         const stepContainer = document.getElementById('weight-step-segments');
         stepContainer.innerHTML = '';
@@ -3184,7 +3137,6 @@
           stepContainer.appendChild(btn);
         });
 
-        // 휴식 타이머 시간 세그먼트
         const restOptions = [
           { val: 0, label: '꺼짐' },
           { val: 60, label: '60초' },
@@ -3208,7 +3160,6 @@
           restContainer.appendChild(btn);
         });
 
-        // 알림음 토글
         const soundToggle = document.getElementById('toggle-rest-sound');
         soundToggle.classList.toggle('on', Boolean(settings.soundEnabled));
       }
@@ -3238,7 +3189,6 @@
         showToast(settings.soundEnabled ? '휴식 종료 알림을 켰어요' : '휴식 종료 알림을 껐어요');
       });
 
-      // 백업 내보내기 (클립보드 & 파일)
       function buildBackupPayload() {
         return JSON.stringify({
           app: 'minimal-workout-tracker',
@@ -3313,7 +3263,6 @@
         reader.readAsText(file);
       });
 
-      // 전체 데이터 초기화 (2단계 안전 확인)
       const resetBtn = document.getElementById('btn-reset-all');
       resetBtn.addEventListener('click', () => {
         if (!resetConfirmPending) {
