@@ -122,6 +122,10 @@
       padding-bottom: 68px;
     }
 
+    #view-workout.active {
+      padding-bottom: 118px;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
@@ -354,7 +358,7 @@
       line-height: 1.5;
     }
 
-    /* 홈 하단 액션 버튼 영역 (운동 시작 / 루틴·통계 / 설정) */
+    /* 홈 하단 액션 버튼 영역 */
     .home-actions {
       position: fixed;
       left: 50%;
@@ -578,85 +582,60 @@
     .workout-date-banner {
       background-color: var(--bg-surface);
       border-radius: 18px;
-      padding: 14px 18px;
+      padding: 13px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       margin-bottom: 12px;
     }
 
     .workout-date-text {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 800;
       letter-spacing: -0.02em;
       color: var(--text-primary);
+      min-width: 0;
+    }
+
+    .total-timer-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
     }
 
     .total-time-badge {
-      background-color: var(--accent-soft);
-      color: var(--accent-soft-text);
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
       font-size: 13px;
       font-weight: 800;
       padding: 6px 11px;
       border-radius: 10px;
-      flex-shrink: 0;
-    }
-
-    /* 휴식 타이머 플로팅 배너 */
-    .rest-timer-banner {
-      display: none;
-      background-color: var(--accent-primary);
-      color: #FFFFFF;
-      border-radius: 16px;
-      padding: 12px 16px;
-      margin-bottom: 12px;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      animation: fadeIn 0.18s ease-out;
-    }
-
-    .rest-timer-banner.active {
-      display: flex;
-    }
-
-    .rest-timer-info {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-    }
-
-    .rest-timer-label {
-      font-size: 13px;
-      font-weight: 600;
-      opacity: 0.9;
-    }
-
-    .rest-timer-clock {
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .rest-timer-controls {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .rest-ctrl-btn {
-      background-color: rgba(255, 255, 255, 0.2);
-      color: #FFFFFF;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 10px;
-      border-radius: 9px;
+      gap: 5px;
       cursor: pointer;
     }
 
-    .rest-ctrl-btn:active {
-      background-color: rgba(255, 255, 255, 0.32);
+    .total-time-badge.paused {
+      background-color: var(--accent-soft);
+      color: var(--accent-soft-text);
+    }
+
+    .total-time-reset-btn {
+      background-color: var(--bg-elevated);
+      color: var(--text-tertiary);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 9px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .total-time-reset-btn:active {
+      background-color: var(--bg-surface-strong);
+      color: var(--text-primary);
     }
 
     .workout-column-header {
@@ -716,7 +695,7 @@
       background-color: var(--accent-hover);
     }
 
-    /* 개별 운동 종목 카드 (운동 시작 & 루틴 공용) */
+    /* 개별 운동 종목 카드 */
     .exercise-card {
       background-color: var(--bg-surface);
       border-radius: 22px;
@@ -756,24 +735,6 @@
       background-color: var(--bg-elevated);
       padding: 4px 9px;
       border-radius: 9px;
-    }
-
-    .timer-pill {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-primary);
-      background-color: var(--bg-elevated);
-      padding: 4px 9px;
-      border-radius: 9px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-    }
-
-    .timer-pill.running {
-      background-color: var(--accent-primary);
-      color: #FFFFFF;
     }
 
     .prev-record-hint {
@@ -939,7 +900,7 @@
       font-size: 12px;
     }
 
-    /* 최하단 고정 '운동 종목 추가' 버튼 */
+    /* 최하단 고정 '휴식 다이얼 타이머 + 운동 종목 추가' 도크 */
     .fixed-bottom-cta {
       position: fixed;
       left: 50%;
@@ -947,9 +908,208 @@
       bottom: 0;
       width: 100%;
       max-width: 480px;
-      padding: 14px 20px calc(var(--safe-bottom) + 18px);
-      background: linear-gradient(to top, #FFFFFF 80%, rgba(255, 255, 255, 0));
+      padding: 10px 20px calc(var(--safe-bottom) + 16px);
+      background: linear-gradient(to top, #FFFFFF 88%, rgba(255, 255, 255, 0));
       z-index: 25;
+    }
+
+    /* n분 n초 다이얼 휴식 타이머 패널 */
+    .rest-dial-dock {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-hairline);
+      border-radius: 20px;
+      padding: 8px 14px;
+      margin-bottom: 10px;
+    }
+
+    .rest-dial-idle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .rest-dial-idle.hidden {
+      display: none;
+    }
+
+    .rest-dial-label-col {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .rest-dial-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .rest-dial-sub {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+    }
+
+    .dial-wheels-group {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 78px;
+      padding: 0 8px;
+      flex: 1;
+      max-width: 176px;
+    }
+
+    .dial-highlight-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      height: 26px;
+      background-color: var(--bg-elevated);
+      border-radius: 8px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .dial-wheel-wrap {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      height: 78px;
+    }
+
+    .dial-wheel {
+      width: 44px;
+      height: 78px;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: y mandatory;
+      scrollbar-width: none;
+    }
+
+    .dial-wheel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .dial-spacer {
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .dial-item {
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      scroll-snap-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.12s, font-size 0.12s;
+    }
+
+    .dial-item.active {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .dial-unit-text {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-secondary);
+      margin-left: 1px;
+      margin-right: 4px;
+      pointer-events: none;
+    }
+
+    .dial-start-btn {
+      height: 42px;
+      padding: 0 16px;
+      border-radius: 13px;
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: transform 0.1s, background-color 0.15s;
+    }
+
+    .dial-start-btn:active {
+      transform: scale(0.97);
+      background-color: var(--accent-hover);
+    }
+
+    /* 휴식 타이머 작동 중 상태 */
+    .rest-dial-running {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 52px;
+      gap: 10px;
+    }
+
+    .rest-dial-running.active {
+      display: flex;
+    }
+
+    .rest-running-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rest-running-tag {
+      background-color: var(--accent-soft);
+      color: var(--accent-soft-text);
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 8px;
+    }
+
+    .rest-running-clock {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+    }
+
+    .rest-running-btns {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .rest-ctrl-btn {
+      height: 36px;
+      padding: 0 11px;
+      border-radius: 10px;
+      background-color: var(--bg-elevated);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .rest-ctrl-btn:active {
+      background-color: var(--bg-surface-strong);
+    }
+
+    .rest-ctrl-btn.stop {
+      background-color: var(--accent-primary);
+      color: #FFFFFF;
     }
 
     /* 바텀 시트 공통 */
@@ -1634,7 +1794,7 @@
 
       <div class="card">
         <div class="summary-header">
-          <span id="selected-date-label" class="summary-date">11월 26일 운동</span>
+          <span id="selected-date-label" class="summary-date">11월 27일 운동</span>
           <span id="selected-date-meta" class="summary-meta">기록 없음</span>
         </div>
         <div id="selected-date-summary" class="summary-list"></div>
@@ -1687,30 +1847,59 @@
       </div>
 
       <div class="workout-date-banner">
-        <span id="workout-date-title" class="workout-date-text">2026년 11월 26일 운동</span>
-        <span id="workout-total-time-badge" class="total-time-badge">총 00:00</span>
-      </div>
-
-      <!-- 세트 완료 시 자동 휴식 타이머 배너 -->
-      <div id="rest-timer-banner" class="rest-timer-banner">
-        <div class="rest-timer-info">
-          <span class="rest-timer-label">휴식 시간</span>
-          <span id="rest-timer-clock" class="rest-timer-clock">01:30</span>
-        </div>
-        <div class="rest-timer-controls">
-          <button type="button" id="btn-rest-plus" class="rest-ctrl-btn">+15초</button>
-          <button type="button" id="btn-rest-skip" class="rest-ctrl-btn">건너뛰기</button>
+        <span id="workout-date-title" class="workout-date-text">2026년 11월 27일 운동</span>
+        <div class="total-timer-controls">
+          <button type="button" id="workout-total-time-badge" class="total-time-badge" title="탭하여 총 운동 시간 일시정지/재개">
+            <span id="workout-timer-icon">⏸</span>
+            <span id="workout-total-time-text">총 00:00</span>
+          </button>
+          <button type="button" id="btn-reset-total-timer" class="total-time-reset-btn" title="총 운동 시간 초기화">초기화</button>
         </div>
       </div>
 
       <div class="workout-column-header">
-        <span class="column-labels">운동 종목 / 세트 / 진행 시간</span>
+        <span class="column-labels">운동 종목 / 세트 기록</span>
         <button type="button" id="btn-header-add" class="header-plus-btn" aria-label="운동 종목 추가">+</button>
       </div>
 
       <div id="exercise-cards-container"></div>
 
+      <!-- 최하단 고정: n분 n초 다이얼 휴식 타이머 + 운동 종목 추가 버튼 -->
       <div class="fixed-bottom-cta">
+        <div class="rest-dial-dock">
+          <!-- 대기 상태: n분 n초 다이얼 설정 -->
+          <div id="rest-dial-idle" class="rest-dial-idle">
+            <div class="rest-dial-label-col">
+              <span class="rest-dial-title">휴식 타이머</span>
+              <span class="rest-dial-sub">다이얼 설정</span>
+            </div>
+            <div class="dial-wheels-group">
+              <div class="dial-highlight-bar"></div>
+              <div class="dial-wheel-wrap">
+                <div id="dial-wheel-min" class="dial-wheel" aria-label="분 선택"></div>
+                <span class="dial-unit-text">분</span>
+              </div>
+              <div class="dial-wheel-wrap">
+                <div id="dial-wheel-sec" class="dial-wheel" aria-label="초 선택"></div>
+                <span class="dial-unit-text">초</span>
+              </div>
+            </div>
+            <button type="button" id="btn-dial-start" class="dial-start-btn">시작</button>
+          </div>
+
+          <!-- 작동 상태: 남은 시간 카운트다운 -->
+          <div id="rest-dial-running" class="rest-dial-running">
+            <div class="rest-running-left">
+              <span class="rest-running-tag">휴식 중</span>
+              <span id="rest-timer-clock" class="rest-running-clock">01:30</span>
+            </div>
+            <div class="rest-running-btns">
+              <button type="button" id="btn-rest-plus" class="rest-ctrl-btn">+15초</button>
+              <button type="button" id="btn-rest-stop" class="rest-ctrl-btn stop">정지</button>
+            </div>
+          </div>
+        </div>
+
         <button type="button" id="btn-bottom-add" class="btn-primary-large">+ 운동 종목 추가</button>
       </div>
     </section>
@@ -1834,7 +2023,7 @@
 
       <!-- 세트 간 휴식 타이머 -->
       <div class="card">
-        <h2 class="settings-section-title">세트 간 휴식 타이머</h2>
+        <h2 class="settings-section-title">세트 간 자동 휴식 타이머</h2>
         <p class="settings-section-desc">세트를 완료(✓) 체크하면 휴식 카운트다운이 자동 시작돼요</p>
 
         <div id="rest-time-segments" class="segment-group five-cols" style="margin-top: 0; margin-bottom: 12px;"></div>
@@ -1909,6 +2098,13 @@
       const LIBRARY_KEY = 'minimal_workout_library_v1';
       const ROUTINE_KEY = 'minimal_workout_routines_v1';
       const SETTINGS_KEY = 'minimal_workout_settings_v1';
+
+      // 백그라운드/화면 꺼짐 대응 타임스탬프 저장 키
+      const WORKOUT_TIMER_KEY = 'minimal_workout_total_timer_v1';
+      const REST_TIMER_KEY = 'minimal_workout_rest_timer_v1';
+      const REST_DIAL_PREF_KEY = 'minimal_workout_rest_dial_pref_v1';
+      const WORKOUT_DRAFT_KEY = 'minimal_workout_active_draft_v1';
+
       const ROUTINE_SPLITS = ['가슴', '등', '어깨', '하체', '팔'];
 
       const THEMES = [
@@ -2081,16 +2277,507 @@
       let viewMonth = today.getMonth();
       let selectedDateKey = toDateKey(today);
 
-      // 운동 세션 및 타이머 상태
       let activeExercises = [];
-      let runningTimerId = null;
-      let timerInterval = null;
 
-      // 휴식 타이머 상태
-      let restRemaining = 0;
-      let restInterval = null;
+      // =========================================================================
+      // 1. 화면 꺼짐 방지 (Wake Lock API) 관리
+      // =========================================================================
+      let wakeLockSentinel = null;
 
-      // DOM 참조
+      function isAnyTimerRunning() {
+        const wt = getStoredWorkoutTimer();
+        const rtEnd = getStoredRestEndTime();
+        return Boolean((wt && wt.isRunning && wt.startTimestamp) || (rtEnd && rtEnd > Date.now()));
+      }
+
+      async function requestWakeLock() {
+        if (!('wakeLock' in navigator)) return;
+        if (document.visibilityState !== 'visible') return;
+        if (!isAnyTimerRunning()) return;
+        if (wakeLockSentinel) return;
+
+        try {
+          wakeLockSentinel = await navigator.wakeLock.request('screen');
+          wakeLockSentinel.addEventListener('release', () => {
+            wakeLockSentinel = null;
+          });
+        } catch (e) {
+          wakeLockSentinel = null;
+        }
+      }
+
+      async function releaseWakeLock() {
+        if (wakeLockSentinel) {
+          try {
+            await wakeLockSentinel.release();
+          } catch (e) {}
+          wakeLockSentinel = null;
+        }
+      }
+
+      function updateWakeLockState() {
+        if (isAnyTimerRunning() && document.visibilityState === 'visible') {
+          requestWakeLock();
+        } else {
+          releaseWakeLock();
+        }
+      }
+
+      // =========================================================================
+      // 2. 알림음 (iOS Safari WebAudio 잠금 해제 포함)
+      // =========================================================================
+      let sharedAudioCtx = null;
+
+      function unlockAudioContext() {
+        try {
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (!AudioCtx) return;
+          if (!sharedAudioCtx) {
+            sharedAudioCtx = new AudioCtx();
+          }
+          if (sharedAudioCtx.state === 'suspended') {
+            sharedAudioCtx.resume();
+          }
+        } catch (e) {}
+      }
+
+      document.addEventListener('touchstart', unlockAudioContext, { passive: true });
+      document.addEventListener('click', unlockAudioContext, { passive: true });
+
+      function playRestDoneAlert() {
+        if (!settings.soundEnabled) return;
+        try {
+          if (navigator.vibrate) navigator.vibrate([200, 90, 200]);
+          const AudioCtx = window.AudioContext || window.webkitAudioContext;
+          if (AudioCtx) {
+            if (!sharedAudioCtx) sharedAudioCtx = new AudioCtx();
+            if (sharedAudioCtx.state === 'suspended') {
+              sharedAudioCtx.resume();
+            }
+            const now = sharedAudioCtx.currentTime;
+            const osc1 = sharedAudioCtx.createOscillator();
+            const gain1 = sharedAudioCtx.createGain();
+            osc1.type = 'sine';
+            osc1.frequency.setValueAtTime(880, now);
+            gain1.gain.setValueAtTime(0.1, now);
+            gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+            osc1.connect(gain1);
+            gain1.connect(sharedAudioCtx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.26);
+
+            const osc2 = sharedAudioCtx.createOscillator();
+            const gain2 = sharedAudioCtx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.setValueAtTime(1174.66, now + 0.18);
+            gain2.gain.setValueAtTime(0.11, now + 0.18);
+            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+            osc2.connect(gain2);
+            gain2.connect(sharedAudioCtx.destination);
+            osc2.start(now + 0.18);
+            osc2.stop(now + 0.52);
+          }
+        } catch (e) {}
+      }
+
+      // =========================================================================
+      // 3. 총 운동 시간 타이머 (타임스탬프 + localStorage 영구 저장)
+      // =========================================================================
+      let workoutTimerState = null;
+      let workoutTickInterval = null;
+
+      function getStoredWorkoutTimer() {
+        if (workoutTimerState) return workoutTimerState;
+        const raw = localStorage.getItem(WORKOUT_TIMER_KEY);
+        if (raw) {
+          try {
+            workoutTimerState = JSON.parse(raw);
+            return workoutTimerState;
+          } catch (e) {}
+        }
+        return null;
+      }
+
+      function persistWorkoutTimer(state) {
+        workoutTimerState = state;
+        if (state) {
+          localStorage.setItem(WORKOUT_TIMER_KEY, JSON.stringify(state));
+        } else {
+          localStorage.removeItem(WORKOUT_TIMER_KEY);
+        }
+      }
+
+      function clearWorkoutTimerStorage() {
+        if (workoutTickInterval) {
+          clearInterval(workoutTickInterval);
+          workoutTickInterval = null;
+        }
+        workoutTimerState = null;
+        localStorage.removeItem(WORKOUT_TIMER_KEY);
+        localStorage.removeItem(WORKOUT_DRAFT_KEY);
+        updateWakeLockState();
+      }
+
+      function getCurrentTotalWorkoutSeconds() {
+        const st = getStoredWorkoutTimer();
+        if (!st) return 0;
+        const base = Number(st.baseSeconds) || 0;
+        if (st.isRunning && st.startTimestamp) {
+          const delta = Math.max(0, Math.floor((Date.now() - st.startTimestamp) / 1000));
+          return base + delta;
+        }
+        return base;
+      }
+
+      function startWorkoutTimer(dateKey, initialBaseSeconds = 0) {
+        const state = {
+          dateKey,
+          baseSeconds: Math.max(0, Math.floor(Number(initialBaseSeconds) || 0)),
+          startTimestamp: Date.now(),
+          isRunning: true
+        };
+        persistWorkoutTimer(state);
+        ensureWorkoutTickLoop();
+        updateTotalWorkoutTimeDisplay();
+        updateWakeLockState();
+      }
+
+      function pauseWorkoutTimer() {
+        const st = getStoredWorkoutTimer();
+        if (!st || !st.isRunning) return;
+        const currentTotal = getCurrentTotalWorkoutSeconds();
+        persistWorkoutTimer({
+          dateKey: st.dateKey,
+          baseSeconds: currentTotal,
+          startTimestamp: null,
+          isRunning: false
+        });
+        if (workoutTickInterval) {
+          clearInterval(workoutTickInterval);
+          workoutTickInterval = null;
+        }
+        updateTotalWorkoutTimeDisplay();
+        updateWakeLockState();
+      }
+
+      function resumeWorkoutTimer() {
+        const st = getStoredWorkoutTimer();
+        if (!st) {
+          startWorkoutTimer(selectedDateKey, 0);
+          return;
+        }
+        if (st.isRunning) return;
+        persistWorkoutTimer({
+          dateKey: st.dateKey,
+          baseSeconds: Number(st.baseSeconds) || 0,
+          startTimestamp: Date.now(),
+          isRunning: true
+        });
+        ensureWorkoutTickLoop();
+        updateTotalWorkoutTimeDisplay();
+        updateWakeLockState();
+      }
+
+      function resetWorkoutTimer() {
+        clearWorkoutTimerStorage();
+        updateTotalWorkoutTimeDisplay();
+        showToast('총 운동 시간이 초기화됐어요');
+      }
+
+      function ensureWorkoutTickLoop() {
+        if (workoutTickInterval) clearInterval(workoutTickInterval);
+        const st = getStoredWorkoutTimer();
+        if (!st || !st.isRunning) return;
+        workoutTickInterval = setInterval(() => {
+          updateTotalWorkoutTimeDisplay();
+        }, 500);
+      }
+
+      function updateTotalWorkoutTimeDisplay() {
+        const badge = document.getElementById('workout-total-time-badge');
+        const textEl = document.getElementById('workout-total-time-text');
+        const iconEl = document.getElementById('workout-timer-icon');
+        if (!badge || !textEl || !iconEl) return;
+
+        const st = getStoredWorkoutTimer();
+        const totalSec = getCurrentTotalWorkoutSeconds();
+        textEl.textContent = `총 ${formatSeconds(totalSec)}`;
+
+        if (st && st.isRunning) {
+          badge.classList.remove('paused');
+          iconEl.textContent = '⏸';
+        } else {
+          badge.classList.add('paused');
+          iconEl.textContent = '▶';
+        }
+      }
+
+      function saveWorkoutDraft() {
+        const st = getStoredWorkoutTimer();
+        if (!st) return;
+        localStorage.setItem(WORKOUT_DRAFT_KEY, JSON.stringify({
+          dateKey: selectedDateKey,
+          exercises: activeExercises
+        }));
+      }
+
+      // =========================================================================
+      // 4. 휴식 타이머 + n분 n초 다이얼 (타임스탬프 + localStorage 영구 저장)
+      // =========================================================================
+      let restEndTimestamp = null;
+      let restTickInterval = null;
+      let dialMin = 1;
+      let dialSec = 30;
+      const DIAL_ITEM_HEIGHT = 26;
+
+      function loadDialPref() {
+        const raw = localStorage.getItem(REST_DIAL_PREF_KEY);
+        if (raw) {
+          try {
+            const p = JSON.parse(raw);
+            if (typeof p.min === 'number' && typeof p.sec === 'number') {
+              dialMin = Math.min(59, Math.max(0, p.min));
+              dialSec = Math.min(59, Math.max(0, p.sec));
+            }
+          } catch (e) {}
+        }
+      }
+
+      function saveDialPref() {
+        localStorage.setItem(REST_DIAL_PREF_KEY, JSON.stringify({ min: dialMin, sec: dialSec }));
+      }
+
+      loadDialPref();
+
+      function getStoredRestEndTime() {
+        if (restEndTimestamp && restEndTimestamp > 0) return restEndTimestamp;
+        const raw = localStorage.getItem(REST_TIMER_KEY);
+        if (raw) {
+          const val = Number(raw);
+          if (!Number.isNaN(val) && val > 0) {
+            restEndTimestamp = val;
+            return val;
+          }
+        }
+        return null;
+      }
+
+      function persistRestEndTime(endTs) {
+        restEndTimestamp = endTs;
+        if (endTs && endTs > 0) {
+          localStorage.setItem(REST_TIMER_KEY, String(endTs));
+        } else {
+          localStorage.removeItem(REST_TIMER_KEY);
+        }
+      }
+
+      function stopRestTimer(silent = false) {
+        if (restTickInterval) {
+          clearInterval(restTickInterval);
+          restTickInterval = null;
+        }
+        persistRestEndTime(null);
+        renderRestTimerUI();
+        updateWakeLockState();
+        if (!silent) {
+          syncDialScrollPositions();
+        }
+      }
+
+      function completeRestTimer() {
+        if (restTickInterval) {
+          clearInterval(restTickInterval);
+          restTickInterval = null;
+        }
+        persistRestEndTime(null);
+        renderRestTimerUI();
+        updateWakeLockState();
+        syncDialScrollPositions();
+        playRestDoneAlert();
+        showToast('휴식 시간이 종료됐어요! 다음 세트를 시작하세요');
+      }
+
+      function startRestTimer(seconds) {
+        const totalSec = Math.max(1, Math.floor(Number(seconds) || 0));
+        const endTs = Date.now() + totalSec * 1000;
+        persistRestEndTime(endTs);
+        renderRestTimerUI();
+        ensureRestTickLoop();
+        updateWakeLockState();
+      }
+
+      function ensureRestTickLoop() {
+        if (restTickInterval) clearInterval(restTickInterval);
+        const endTs = getStoredRestEndTime();
+        if (!endTs) return;
+
+        restTickInterval = setInterval(() => {
+          const currentEnd = getStoredRestEndTime();
+          if (!currentEnd) {
+            stopRestTimer();
+            return;
+          }
+          const remainingMs = currentEnd - Date.now();
+          if (remainingMs <= 0) {
+            completeRestTimer();
+            return;
+          }
+          const clockEl = document.getElementById('rest-timer-clock');
+          if (clockEl) {
+            clockEl.textContent = formatSeconds(Math.ceil(remainingMs / 1000));
+          }
+        }, 250);
+      }
+
+      function renderRestTimerUI() {
+        const idleBox = document.getElementById('rest-dial-idle');
+        const runningBox = document.getElementById('rest-dial-running');
+        const clockEl = document.getElementById('rest-timer-clock');
+        if (!idleBox || !runningBox || !clockEl) return;
+
+        const endTs = getStoredRestEndTime();
+        if (endTs && endTs > Date.now()) {
+          const remainingSec = Math.ceil((endTs - Date.now()) / 1000);
+          clockEl.textContent = formatSeconds(remainingSec);
+          idleBox.classList.add('hidden');
+          runningBox.classList.add('active');
+        } else {
+          idleBox.classList.remove('hidden');
+          runningBox.classList.remove('active');
+        }
+      }
+
+      // 다이얼 휠 초기화 (0~59분, 0~59초)
+      function initDialWheels() {
+        const minWheel = document.getElementById('dial-wheel-min');
+        const secWheel = document.getElementById('dial-wheel-sec');
+
+        function buildWheel(wheelEl, maxVal, getVal, setVal) {
+          wheelEl.innerHTML = '';
+          const topSpacer = document.createElement('div');
+          topSpacer.className = 'dial-spacer';
+          wheelEl.appendChild(topSpacer);
+
+          for (let i = 0; i <= maxVal; i++) {
+            const item = document.createElement('div');
+            item.className = 'dial-item';
+            item.dataset.val = String(i);
+            item.textContent = String(i).padStart(2, '0');
+            item.addEventListener('click', () => {
+              wheelEl.scrollTo({ top: i * DIAL_ITEM_HEIGHT, behavior: 'smooth' });
+            });
+            wheelEl.appendChild(item);
+          }
+
+          const bottomSpacer = document.createElement('div');
+          bottomSpacer.className = 'dial-spacer';
+          wheelEl.appendChild(bottomSpacer);
+
+          let scrollRaf = null;
+          wheelEl.addEventListener('scroll', () => {
+            if (scrollRaf) cancelAnimationFrame(scrollRaf);
+            scrollRaf = requestAnimationFrame(() => {
+              const idx = Math.min(maxVal, Math.max(0, Math.round(wheelEl.scrollTop / DIAL_ITEM_HEIGHT)));
+              if (getVal() !== idx) {
+                setVal(idx);
+                saveDialPref();
+              }
+              updateWheelHighlight(wheelEl, idx);
+            });
+          }, { passive: true });
+        }
+
+        buildWheel(minWheel, 59, () => dialMin, (v) => { dialMin = v; });
+        buildWheel(secWheel, 59, () => dialSec, (v) => { dialSec = v; });
+        syncDialScrollPositions();
+      }
+
+      function updateWheelHighlight(wheelEl, activeIdx) {
+        const items = wheelEl.querySelectorAll('.dial-item');
+        items.forEach((el, idx) => {
+          el.classList.toggle('active', idx === activeIdx);
+        });
+      }
+
+      function syncDialScrollPositions() {
+        const minWheel = document.getElementById('dial-wheel-min');
+        const secWheel = document.getElementById('dial-wheel-sec');
+        if (!minWheel || !secWheel) return;
+        minWheel.scrollTop = dialMin * DIAL_ITEM_HEIGHT;
+        secWheel.scrollTop = dialSec * DIAL_ITEM_HEIGHT;
+        updateWheelHighlight(minWheel, dialMin);
+        updateWheelHighlight(secWheel, dialSec);
+      }
+
+      document.getElementById('btn-dial-start').addEventListener('click', () => {
+        unlockAudioContext();
+        const totalSec = dialMin * 60 + dialSec;
+        if (totalSec <= 0) {
+          showToast('다이얼에서 휴식 시간을 1초 이상 설정해 주세요');
+          return;
+        }
+        startRestTimer(totalSec);
+      });
+
+      document.getElementById('btn-rest-plus').addEventListener('click', () => {
+        const currentEnd = getStoredRestEndTime();
+        if (currentEnd && currentEnd > Date.now()) {
+          const newEnd = currentEnd + 15000;
+          persistRestEndTime(newEnd);
+          renderRestTimerUI();
+        }
+      });
+
+      document.getElementById('btn-rest-stop').addEventListener('click', () => {
+        stopRestTimer(false);
+      });
+
+      // =========================================================================
+      // 5. 복귀 시 즉시 동기화 (visibilitychange, pageshow, focus)
+      // =========================================================================
+      function syncTimersOnResume() {
+        // 1) 휴식 타이머 동기화
+        const restEnd = getStoredRestEndTime();
+        if (restEnd) {
+          const remainingMs = restEnd - Date.now();
+          if (remainingMs <= 0) {
+            completeRestTimer();
+          } else {
+            renderRestTimerUI();
+            ensureRestTickLoop();
+          }
+        }
+
+        // 2) 총 운동 시간 타이머 동기화
+        const wt = getStoredWorkoutTimer();
+        if (wt) {
+          updateTotalWorkoutTimeDisplay();
+          if (wt.isRunning) {
+            ensureWorkoutTickLoop();
+          }
+        }
+
+        // 3) 화면 켜짐 유지(Wake Lock) 재요청
+        updateWakeLockState();
+      }
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          syncTimersOnResume();
+        }
+      });
+
+      window.addEventListener('pageshow', () => {
+        syncTimersOnResume();
+      });
+
+      window.addEventListener('focus', () => {
+        syncTimersOnResume();
+      });
+
+      // =========================================================================
+      // DOM 및 화면 전환
+      // =========================================================================
       const views = {
         home: document.getElementById('view-home'),
         routine: document.getElementById('view-routine'),
@@ -2112,14 +2799,14 @@
         Object.values(views).forEach(v => v.classList.remove('active'));
         views[name].classList.add('active');
         window.scrollTo(0, 0);
-        if (name !== 'workout') {
-          stopTimer();
-          stopRestTimer();
-        }
         if (name === 'home') renderHome();
         if (name === 'routine') renderRoutineView();
         if (name === 'stats') renderStats();
         if (name === 'settings') renderSettingsView();
+        if (name === 'workout') {
+          renderRestTimerUI();
+          requestAnimationFrame(() => syncDialScrollPositions());
+        }
       }
 
       // ---------------- 1. 홈 화면 (달력 + 일일 총 운동시간 요약) ----------------
@@ -2187,12 +2874,17 @@
 
         listEl.innerHTML = '';
 
+        const activeWt = getStoredWorkoutTimer();
+        const hasActiveSessionOnDate = activeWt && activeWt.dateKey === selectedDateKey;
+
         if (dayExercises.length === 0) {
-          metaEl.textContent = '기록 없음';
-          startBtn.textContent = '운동 시작';
+          metaEl.textContent = hasActiveSessionOnDate ? '운동 진행 중' : '기록 없음';
+          startBtn.textContent = hasActiveSessionOnDate ? '진행 중인 운동 이어하기' : '운동 시작';
           const hint = document.createElement('p');
           hint.className = 'empty-hint';
-          hint.textContent = '아직 기록된 운동이 없어요. 아래 버튼을 눌러 오늘의 세션을 시작해 보세요.';
+          hint.textContent = hasActiveSessionOnDate
+            ? '현재 측정 중인 운동 세션이 있어요. 아래 버튼을 눌러 이어서 기록하세요.'
+            : '아직 기록된 운동이 없어요. 아래 버튼을 눌러 오늘의 세션을 시작해 보세요.';
           listEl.appendChild(hint);
         } else {
           const totalSets = dayExercises.reduce((acc, ex) => acc + ex.sets.length, 0);
@@ -2215,7 +2907,7 @@
                 <div class="summary-item-name">${escapeHtml(ex.name)}</div>
                 ${memoHtml}
               </div>
-              <span class="summary-item-detail">${ex.sets.length}set · 최고 ${maxWeight}kg · ${formatSeconds(ex.elapsedSeconds || 0)}</span>
+              <span class="summary-item-detail">${ex.sets.length}set · 최고 ${maxWeight}kg</span>
             `;
             listEl.appendChild(item);
           });
@@ -2398,79 +3090,7 @@
         if (e.key === 'Enter') addRoutineItem();
       });
 
-      // ---------------- 3. 운동 시작 화면 (총 운동시간 합산 + 휴식 타이머) ----------------
-      function getTotalActiveWorkoutSeconds() {
-        return activeExercises.reduce((sum, ex) => sum + (Number(ex.elapsedSeconds) || 0), 0);
-      }
-
-      function updateTotalWorkoutTimeDisplay() {
-        const badge = document.getElementById('workout-total-time-badge');
-        if (badge) {
-          badge.textContent = `총 ${formatSeconds(getTotalActiveWorkoutSeconds())}`;
-        }
-      }
-
-      function playRestDoneAlert() {
-        if (!settings.soundEnabled) return;
-        try {
-          if (navigator.vibrate) navigator.vibrate([180, 80, 180]);
-          const AudioCtx = window.AudioContext || window.webkitAudioContext;
-          if (AudioCtx) {
-            const ctx = new AudioCtx();
-            const osc = ctx.createOscillator();
-            const gain = ctx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(880, ctx.currentTime);
-            gain.gain.setValueAtTime(0.08, ctx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
-            osc.connect(gain);
-            gain.connect(ctx.destination);
-            osc.start();
-            osc.stop(ctx.currentTime + 0.36);
-          }
-        } catch (e) {}
-      }
-
-      function startRestTimer(seconds) {
-        if (!seconds || seconds <= 0) return;
-        stopRestTimer();
-        restRemaining = seconds;
-        const banner = document.getElementById('rest-timer-banner');
-        const clock = document.getElementById('rest-timer-clock');
-        clock.textContent = formatSeconds(restRemaining);
-        banner.classList.add('active');
-
-        restInterval = setInterval(() => {
-          restRemaining -= 1;
-          if (restRemaining <= 0) {
-            stopRestTimer();
-            playRestDoneAlert();
-            showToast('휴식 시간이 종료됐어요! 다음 세트를 시작하세요');
-            return;
-          }
-          clock.textContent = formatSeconds(restRemaining);
-        }, 1000);
-      }
-
-      function stopRestTimer() {
-        if (restInterval) {
-          clearInterval(restInterval);
-          restInterval = null;
-        }
-        restRemaining = 0;
-        const banner = document.getElementById('rest-timer-banner');
-        if (banner) banner.classList.remove('active');
-      }
-
-      document.getElementById('btn-rest-plus').addEventListener('click', () => {
-        if (restRemaining > 0) {
-          restRemaining += 15;
-          document.getElementById('rest-timer-clock').textContent = formatSeconds(restRemaining);
-        }
-      });
-
-      document.getElementById('btn-rest-skip').addEventListener('click', stopRestTimer);
-
+      // ---------------- 3. 운동 시작 화면 ----------------
       function getPreviousRecordText(exerciseName) {
         const sortedDates = Object.keys(logs)
           .filter(k => k < selectedDateKey && Array.isArray(logs[k]))
@@ -2490,51 +3110,65 @@
       }
 
       function openWorkoutView() {
+        unlockAudioContext();
         const d = parseDateKey(selectedDateKey);
         document.getElementById('workout-date-title').textContent =
           `${d.getFullYear()}년 ${d.getMonth() + 1}월 ${d.getDate()}일 운동`;
 
-        const existing = logs[selectedDateKey];
-        if (existing && existing.length > 0) {
-          activeExercises = JSON.parse(JSON.stringify(existing));
-        } else {
-          activeExercises = [];
+        const storedWt = getStoredWorkoutTimer();
+        const draftRaw = localStorage.getItem(WORKOUT_DRAFT_KEY);
+        let restoredFromDraft = false;
+
+        if (storedWt && storedWt.dateKey === selectedDateKey && draftRaw) {
+          try {
+            const draft = JSON.parse(draftRaw);
+            if (draft && draft.dateKey === selectedDateKey && Array.isArray(draft.exercises)) {
+              activeExercises = draft.exercises;
+              restoredFromDraft = true;
+            }
+          } catch (e) {}
         }
 
-        stopRestTimer();
+        if (!restoredFromDraft) {
+          const existing = logs[selectedDateKey];
+          if (existing && existing.length > 0) {
+            activeExercises = JSON.parse(JSON.stringify(existing));
+          } else {
+            activeExercises = [];
+          }
+        }
+
+        // 총 운동 시간 타이머 시작 또는 기존 진행 세션 동기화
+        if (storedWt && storedWt.dateKey === selectedDateKey) {
+          updateTotalWorkoutTimeDisplay();
+          if (storedWt.isRunning) ensureWorkoutTickLoop();
+        } else {
+          const existing = logs[selectedDateKey] || [];
+          const prevSavedSec = existing.reduce((acc, ex) => acc + (Number(ex.elapsedSeconds) || 0), 0);
+          startWorkoutTimer(selectedDateKey, prevSavedSec);
+        }
+
+        saveWorkoutDraft();
         renderWorkoutCards();
         switchView('workout');
+        updateWakeLockState();
       }
 
-      function toggleExerciseTimer(exId) {
-        if (runningTimerId === exId) {
-          stopTimer();
-          renderWorkoutCards();
-          return;
+      document.getElementById('workout-total-time-badge').addEventListener('click', () => {
+        unlockAudioContext();
+        const st = getStoredWorkoutTimer();
+        if (st && st.isRunning) {
+          pauseWorkoutTimer();
+          showToast('총 운동 시간을 일시정지했어요');
+        } else {
+          resumeWorkoutTimer();
+          showToast('총 운동 시간 측정을 재개했어요');
         }
-        stopTimer();
-        runningTimerId = exId;
-        timerInterval = setInterval(() => {
-          const target = activeExercises.find(e => e.id === exId);
-          if (target) {
-            target.elapsedSeconds = (target.elapsedSeconds || 0) + 1;
-            const timerEl = document.querySelector(`[data-timer-id="${exId}"]`);
-            if (timerEl) {
-              timerEl.textContent = formatSeconds(target.elapsedSeconds);
-            }
-            updateTotalWorkoutTimeDisplay();
-          }
-        }, 1000);
-        renderWorkoutCards();
-      }
+      });
 
-      function stopTimer() {
-        runningTimerId = null;
-        if (timerInterval) {
-          clearInterval(timerInterval);
-          timerInterval = null;
-        }
-      }
+      document.getElementById('btn-reset-total-timer').addEventListener('click', () => {
+        resetWorkoutTimer();
+      });
 
       function renderWorkoutCards() {
         updateTotalWorkoutTimeDisplay();
@@ -2560,7 +3194,6 @@
           const card = document.createElement('article');
           card.className = 'exercise-card';
 
-          const isRunning = runningTimerId === ex.id;
           const prevHint = getPreviousRecordText(ex.name);
           const memoVal = ex.memo || '';
 
@@ -2569,10 +3202,6 @@
               <h3 class="exercise-title">${escapeHtml(ex.name)}</h3>
               <div class="exercise-metrics">
                 <span class="set-count-pill">${ex.sets.length}set</span>
-                <button type="button" class="timer-pill ${isRunning ? 'running' : ''}" data-action="toggle-timer" data-id="${ex.id}" title="탭하여 진행 시간 측정">
-                  <span>${isRunning ? '⏸' : '▶'}</span>
-                  <span data-timer-id="${ex.id}">${formatSeconds(ex.elapsedSeconds || 0)}</span>
-                </button>
               </div>
             </div>
             <p class="prev-record-hint">${escapeHtml(prevHint)}</p>
@@ -2612,18 +3241,14 @@
           return;
         }
 
-        const timerBtn = e.target.closest('[data-action="toggle-timer"]');
-        if (timerBtn) {
-          toggleExerciseTimer(timerBtn.dataset.id);
-          return;
-        }
-
         const checkBtn = e.target.closest('[data-action="toggle-set"]');
         if (checkBtn) {
+          unlockAudioContext();
           const exIdx = Number(checkBtn.dataset.ex);
           const setIdx = Number(checkBtn.dataset.set);
           const nowCompleted = !activeExercises[exIdx].sets[setIdx].completed;
           activeExercises[exIdx].sets[setIdx].completed = nowCompleted;
+          saveWorkoutDraft();
           renderWorkoutCards();
           if (nowCompleted && settings.restSeconds > 0) {
             startRestTimer(settings.restSeconds);
@@ -2640,6 +3265,7 @@
             return;
           }
           activeExercises[exIdx].sets.splice(setIdx, 1);
+          saveWorkoutDraft();
           renderWorkoutCards();
           return;
         }
@@ -2650,6 +3276,7 @@
           const sets = activeExercises[exIdx].sets;
           const last = sets[sets.length - 1] || { weight: settings.defaultWeight, reps: settings.defaultReps };
           sets.push({ weight: last.weight, reps: last.reps, completed: false });
+          saveWorkoutDraft();
           renderWorkoutCards();
           return;
         }
@@ -2657,8 +3284,8 @@
         const removeExBtn = e.target.closest('[data-action="remove-exercise"]');
         if (removeExBtn) {
           const exIdx = Number(removeExBtn.dataset.ex);
-          if (activeExercises[exIdx].id === runningTimerId) stopTimer();
           activeExercises.splice(exIdx, 1);
+          saveWorkoutDraft();
           renderWorkoutCards();
           showToast('운동 종목을 삭제했어요');
         }
@@ -2670,12 +3297,14 @@
           const setIdx = Number(e.target.dataset.set);
           const field = e.target.dataset.field;
           activeExercises[exIdx].sets[setIdx][field] = Number(e.target.value) || 0;
+          saveWorkoutDraft();
           return;
         }
 
         if (e.target.dataset.action === 'edit-memo') {
           const exIdx = Number(e.target.dataset.ex);
           activeExercises[exIdx].memo = e.target.value;
+          saveWorkoutDraft();
         }
       });
 
@@ -2723,6 +3352,7 @@
                 sets: setsArr
               });
             });
+            saveWorkoutDraft();
             closeLoadRoutineSheet();
             renderWorkoutCards();
             showToast(`'${split}' 루틴 ${items.length}종목을 불러왔어요`);
@@ -2937,6 +3567,7 @@
           memo: '',
           sets: initialSets
         });
+        saveWorkoutDraft();
         closeAddSheet();
         renderWorkoutCards();
         setTimeout(() => {
@@ -2969,16 +3600,21 @@
         if (e.key === 'Enter') addNewExercise(newExInput.value, true);
       });
 
-      // 기록 저장 (일일 운동시간 합산 기록 포함)
+      // 기록 저장 (일일 총 운동 시간 기록 및 타이머 기준 시각 정리)
       document.getElementById('btn-finish-workout').addEventListener('click', () => {
-        stopTimer();
-        stopRestTimer();
+        const totalSec = getCurrentTotalWorkoutSeconds();
+        stopRestTimer(true);
+        clearWorkoutTimerStorage();
+
         if (activeExercises.length === 0) {
           delete logs[selectedDateKey];
           saveLogs(logs);
           showToast('운동 기록이 비워졌어요');
         } else {
-          const totalSec = getTotalActiveWorkoutSeconds();
+          // 전체 운동 시간을 해당 날짜의 세션 총 시간으로 저장
+          activeExercises.forEach((ex, idx) => {
+            ex.elapsedSeconds = idx === 0 ? totalSec : 0;
+          });
           logs[selectedDateKey] = activeExercises;
           saveLogs(logs);
           const timeMsg = totalSec > 0 ? ` (총 ${formatDurationKorean(totalSec)})` : '';
@@ -3279,6 +3915,8 @@
         resetConfirmPending = false;
         resetBtn.textContent = '전체 데이터 초기화';
 
+        stopRestTimer(true);
+        clearWorkoutTimerStorage();
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(ROUTINE_KEY);
         localStorage.removeItem(LIBRARY_KEY);
@@ -3307,8 +3945,31 @@
           .replace(/"/g, '&quot;');
       }
 
-      // 초기 렌더링
-      renderHome();
+      // =========================================================================
+      // 초기 부팅: 다이얼 생성 + 백그라운드 새로고침 복구
+      // =========================================================================
+      initDialWheels();
+
+      const savedWorkoutTimer = getStoredWorkoutTimer();
+      const savedRestEnd = getStoredRestEndTime();
+
+      if (savedWorkoutTimer && savedWorkoutTimer.dateKey) {
+        selectedDateKey = savedWorkoutTimer.dateKey;
+        const d = parseDateKey(selectedDateKey);
+        viewYear = d.getFullYear();
+        viewMonth = d.getMonth();
+        openWorkoutView();
+        syncTimersOnResume();
+      } else {
+        if (savedRestEnd) {
+          if (savedRestEnd <= Date.now()) {
+            completeRestTimer();
+          } else {
+            ensureRestTickLoop();
+          }
+        }
+        renderHome();
+      }
     })();
   </script>
 </body>
