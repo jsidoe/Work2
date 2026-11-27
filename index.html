@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#FFFFFF" />
+  <meta id="meta-theme-color" name="theme-color" content="#FFFFFF" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="운동 기록" />
@@ -22,10 +22,35 @@
       --border-hairline: #EAECEF;
       --accent-primary: #111111;
       --accent-hover: #2C2C2E;
+      --accent-fg: #FFFFFF;
       --accent-soft: #EFEFF1;
       --accent-soft-text: #111111;
+      --bottom-fade: linear-gradient(to top, #FFFFFF 84%, rgba(255, 255, 255, 0));
+      --backdrop-bg: rgba(17, 17, 17, 0.45);
+      --danger-text: #E11D48;
+      --danger-bg: #FFF1F2;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    [data-theme="dark"] {
+      --bg-page: #111113;
+      --bg-surface: #1C1D20;
+      --bg-surface-strong: #2A2C30;
+      --bg-elevated: #24262A;
+      --text-primary: #F3F4F6;
+      --text-secondary: #D1D5DB;
+      --text-tertiary: #8E95A0;
+      --border-hairline: #2B2D31;
+      --accent-primary: #F5F5F7;
+      --accent-hover: #DCDCE0;
+      --accent-fg: #111113;
+      --accent-soft: #2C2E33;
+      --accent-soft-text: #F5F5F7;
+      --bottom-fade: linear-gradient(to top, #111113 84%, rgba(17, 17, 19, 0));
+      --backdrop-bg: rgba(0, 0, 0, 0.68);
+      --danger-text: #FB7185;
+      --danger-bg: rgba(244, 63, 94, 0.14);
     }
 
     [data-theme="blue"] {
@@ -39,8 +64,13 @@
       --border-hairline: #E5E8EB;
       --accent-primary: #3182F6;
       --accent-hover: #1B64DA;
+      --accent-fg: #FFFFFF;
       --accent-soft: #E8F3FF;
       --accent-soft-text: #1B64DA;
+      --bottom-fade: linear-gradient(to top, #FFFFFF 84%, rgba(255, 255, 255, 0));
+      --backdrop-bg: rgba(17, 17, 17, 0.45);
+      --danger-text: #E11D48;
+      --danger-bg: #FFF1F2;
     }
 
     [data-theme="red"] {
@@ -54,8 +84,13 @@
       --border-hairline: #EFE8E9;
       --accent-primary: #F04452;
       --accent-hover: #D63341;
+      --accent-fg: #FFFFFF;
       --accent-soft: #FDECEE;
       --accent-soft-text: #D63341;
+      --bottom-fade: linear-gradient(to top, #FFFFFF 84%, rgba(255, 255, 255, 0));
+      --backdrop-bg: rgba(17, 17, 17, 0.45);
+      --danger-text: #E11D48;
+      --danger-bg: #FFF1F2;
     }
 
     [data-theme="brown"] {
@@ -69,8 +104,13 @@
       --border-hairline: #EDE8E2;
       --accent-primary: #7C5841;
       --accent-hover: #634431;
+      --accent-fg: #FFFFFF;
       --accent-soft: #F2EAE4;
       --accent-soft-text: #634431;
+      --bottom-fade: linear-gradient(to top, #FFFFFF 84%, rgba(255, 255, 255, 0));
+      --backdrop-bg: rgba(17, 17, 17, 0.45);
+      --danger-text: #E11D48;
+      --danger-bg: #FFF1F2;
     }
 
     * {
@@ -269,7 +309,7 @@
     }
 
     .day-cell.selected .day-num {
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-weight: 700;
       text-decoration: none;
     }
@@ -283,7 +323,7 @@
     }
 
     .day-cell.selected .workout-dot {
-      background-color: #FFFFFF;
+      background-color: var(--accent-fg);
     }
 
     /* 선택 날짜 요약 카드 */
@@ -367,7 +407,7 @@
       width: 100%;
       max-width: 480px;
       padding: 12px 20px calc(var(--safe-bottom) + 16px);
-      background: linear-gradient(to top, #FFFFFF 82%, rgba(255, 255, 255, 0));
+      background: var(--bottom-fade);
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -385,7 +425,7 @@
       height: 54px;
       border-radius: 18px;
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 17px;
       font-weight: 700;
       letter-spacing: -0.01em;
@@ -469,7 +509,7 @@
 
     .split-tab-btn.active {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
     }
 
     .routine-add-bar {
@@ -494,7 +534,7 @@
       padding: 0 20px;
       border-radius: 16px;
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 15px;
       font-weight: 700;
       cursor: pointer;
@@ -567,7 +607,7 @@
 
     .finish-btn {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 14px;
       font-weight: 700;
       padding: 9px 16px;
@@ -607,7 +647,7 @@
 
     .total-time-badge {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 13px;
       font-weight: 800;
       padding: 6px 11px;
@@ -672,7 +712,7 @@
 
     .header-plus-btn:active {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
     }
 
     .empty-workout-actions {
@@ -683,7 +723,7 @@
 
     .inline-routine-cta {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 14px;
       font-weight: 700;
       padding: 11px 18px;
@@ -791,7 +831,7 @@
     }
 
     .set-row.completed .metric-input-group {
-      background-color: #FFFFFF;
+      background-color: var(--bg-page);
     }
 
     .big-number-input {
@@ -826,7 +866,7 @@
 
     .set-check-btn.checked {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
     }
 
     .set-del-btn {
@@ -909,7 +949,7 @@
       width: 100%;
       max-width: 480px;
       padding: 10px 20px calc(var(--safe-bottom) + 16px);
-      background: linear-gradient(to top, #FFFFFF 88%, rgba(255, 255, 255, 0));
+      background: var(--bottom-fade);
       z-index: 25;
     }
 
@@ -936,7 +976,7 @@
     .rest-dial-label-col {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      justify-content: center;
       flex-shrink: 0;
     }
 
@@ -945,12 +985,6 @@
       font-weight: 800;
       color: var(--text-primary);
       letter-spacing: -0.01em;
-    }
-
-    .rest-dial-sub {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-tertiary);
     }
 
     .dial-wheels-group {
@@ -1038,7 +1072,7 @@
       padding: 0 16px;
       border-radius: 13px;
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -1109,14 +1143,14 @@
 
     .rest-ctrl-btn.stop {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
     }
 
     /* 바텀 시트 공통 */
     .sheet-backdrop {
       position: fixed;
       inset: 0;
-      background-color: rgba(17, 17, 17, 0.45);
+      background-color: var(--backdrop-bg);
       display: none;
       align-items: flex-end;
       justify-content: center;
@@ -1130,7 +1164,8 @@
     .bottom-sheet {
       width: 100%;
       max-width: 480px;
-      background-color: #FFFFFF;
+      background-color: var(--bg-page);
+      border-top: 1px solid var(--border-hairline);
       border-radius: 28px 28px 0 0;
       padding: 24px 20px calc(var(--safe-bottom) + 24px);
       animation: slideUp 0.22s ease-out;
@@ -1147,7 +1182,7 @@
       width: 40px;
       height: 4px;
       border-radius: 999px;
-      background-color: #E5E7EB;
+      background-color: var(--bg-surface-strong);
       margin: 0 auto 18px;
     }
 
@@ -1282,7 +1317,7 @@
       padding: 0 16px;
       border-radius: 12px;
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -1323,7 +1358,7 @@
     }
 
     .folder-tab-wrap.active .folder-tab-btn {
-      color: #FFFFFF;
+      color: var(--accent-fg);
     }
 
     .folder-tab-del {
@@ -1336,7 +1371,8 @@
     }
 
     .folder-tab-wrap.active .folder-tab-del {
-      color: rgba(255, 255, 255, 0.75);
+      color: var(--accent-fg);
+      opacity: 0.72;
     }
 
     /* 폴더 내 저장된 운동 칩 목록 */
@@ -1375,7 +1411,7 @@
 
     .preset-chip-name:active {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
     }
 
     .chip-folder-badge {
@@ -1675,7 +1711,22 @@
 
     .segment-btn.active {
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
+    }
+
+    .test-sound-btn {
+      height: 30px;
+      padding: 0 11px;
+      border-radius: 9px;
+      background-color: var(--bg-elevated);
+      color: var(--text-primary);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .test-sound-btn:active {
+      background-color: var(--bg-surface-strong);
     }
 
     .toggle-switch {
@@ -1700,11 +1751,12 @@
       height: 22px;
       border-radius: 50%;
       background-color: #FFFFFF;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background-color 0.2s;
     }
 
     .toggle-switch.on .toggle-knob {
       transform: translateX(20px);
+      background-color: var(--accent-fg);
     }
 
     .data-btn-grid {
@@ -1738,8 +1790,8 @@
 
     .data-action-btn.danger {
       width: 100%;
-      color: #E11D48;
-      background-color: #FFF1F2;
+      color: var(--danger-text);
+      background-color: var(--danger-bg);
     }
 
     /* 토스트 메시지 */
@@ -1749,7 +1801,7 @@
       left: 50%;
       transform: translateX(-50%) translateY(-20px);
       background-color: var(--accent-primary);
-      color: #FFFFFF;
+      color: var(--accent-fg);
       font-size: 14px;
       font-weight: 600;
       padding: 12px 20px;
@@ -1871,7 +1923,6 @@
           <div id="rest-dial-idle" class="rest-dial-idle">
             <div class="rest-dial-label-col">
               <span class="rest-dial-title">휴식 타이머</span>
-              <span class="rest-dial-sub">다이얼 설정</span>
             </div>
             <div class="dial-wheels-group">
               <div class="dial-highlight-bar"></div>
@@ -1967,7 +2018,7 @@
       <!-- 테마 색상 설정 -->
       <div class="card">
         <h2 class="settings-section-title">테마 색상</h2>
-        <p class="settings-section-desc">앱 전체 포인트 컬러와 버튼 색상을 변경해요</p>
+        <p class="settings-section-desc">앱 전체 배경과 포인트 컬러를 변경해요</p>
         <div id="theme-options-grid" class="theme-grid"></div>
       </div>
 
@@ -2029,13 +2080,16 @@
         <div id="rest-time-segments" class="segment-group five-cols" style="margin-top: 0; margin-bottom: 12px;"></div>
 
         <div class="setting-row" style="padding-bottom: 0;">
-          <div>
-            <div class="setting-row-label">휴식 종료 알림음 · 진동</div>
-            <div class="setting-row-sub">휴식 시간이 끝나면 짧은 알림을 울려요</div>
+          <div style="flex: 1; min-width: 0;">
+            <div class="setting-row-label">휴식 종료 알림음</div>
+            <div class="setting-row-sub">무음 모드에서도 미디어 음량으로 차임벨이 울려요</div>
           </div>
-          <button type="button" id="toggle-rest-sound" class="toggle-switch on" aria-label="휴식 종료 알림 전환">
-            <span class="toggle-knob"></span>
-          </button>
+          <div style="display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+            <button type="button" id="btn-test-rest-sound" class="test-sound-btn">테스트</button>
+            <button type="button" id="toggle-rest-sound" class="toggle-switch on" aria-label="휴식 종료 알림 전환">
+              <span class="toggle-knob"></span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -2109,6 +2163,7 @@
 
       const THEMES = [
         { id: 'mono', name: '모노크롬', sub: '검정 · 화이트', color: '#111111' },
+        { id: 'dark', name: '다크 모드', sub: '딥 블랙 · 다크', color: '#1C1D20', border: '#4B5563' },
         { id: 'blue', name: '토스 블루', sub: '블루 포인트', color: '#3182F6' },
         { id: 'red', name: '크림슨 레드', sub: '레드 포인트', color: '#F04452' },
         { id: 'brown', name: '에스프레소', sub: '브라운 포인트', color: '#7C5841' }
@@ -2145,6 +2200,10 @@
       function applyTheme(themeId) {
         const themeObj = THEMES.find(t => t.id === themeId) || THEMES[0];
         document.documentElement.setAttribute('data-theme', themeObj.id);
+        const metaTheme = document.getElementById('meta-theme-color');
+        if (metaTheme) {
+          metaTheme.setAttribute('content', themeObj.id === 'dark' ? '#111113' : '#FFFFFF');
+        }
       }
 
       applyTheme(settings.theme);
@@ -2324,18 +2383,105 @@
       }
 
       // =========================================================================
-      // 2. 알림음 (iOS Safari WebAudio 잠금 해제 포함)
+      // 2. 알림음 엔진 (iOS 무음 모드 우회용 내장 WAV 오디오 + WebAudio 폴백)
       // =========================================================================
+      let alarmAudioEl = null;
+      let alarmAudioUnlocked = false;
+      let isAlarmPlaying = false;
       let sharedAudioCtx = null;
 
+      function createChimeWavUrl() {
+        const sampleRate = 44100;
+        const duration = 0.65;
+        const numSamples = Math.floor(sampleRate * duration);
+        const dataSize = numSamples * 2;
+        const buffer = new ArrayBuffer(44 + dataSize);
+        const view = new DataView(buffer);
+
+        function writeStr(offset, str) {
+          for (let i = 0; i < str.length; i++) {
+            view.setUint8(offset + i, str.charCodeAt(i));
+          }
+        }
+
+        writeStr(0, 'RIFF');
+        view.setUint32(4, 36 + dataSize, true);
+        writeStr(8, 'WAVE');
+        writeStr(12, 'fmt ');
+        view.setUint32(16, 16, true);
+        view.setUint16(20, 1, true);
+        view.setUint16(22, 1, true);
+        view.setUint32(24, sampleRate, true);
+        view.setUint32(28, sampleRate * 2, true);
+        view.setUint16(32, 2, true);
+        view.setUint16(34, 16, true);
+        writeStr(36, 'data');
+        view.setUint32(40, dataSize, true);
+
+        for (let i = 0; i < numSamples; i++) {
+          const t = i / sampleRate;
+          let sample = 0;
+          if (t < 0.22) {
+            const env = Math.min(1, t / 0.005) * Math.exp(-t * 10);
+            sample = (Math.sin(2 * Math.PI * 880 * t) + 0.2 * Math.sin(2 * Math.PI * 1760 * t)) * env;
+          } else {
+            const t2 = t - 0.22;
+            const env = Math.min(1, t2 / 0.005) * Math.exp(-t2 * 7);
+            sample = (Math.sin(2 * Math.PI * 1174.66 * t2) + 0.2 * Math.sin(2 * Math.PI * 2349.32 * t2)) * env;
+          }
+          const clamped = Math.max(-1, Math.min(1, sample * 0.45));
+          view.setInt16(44 + i * 2, clamped * 32767, true);
+        }
+
+        const blob = new Blob([buffer], { type: 'audio/wav' });
+        return URL.createObjectURL(blob);
+      }
+
+      function initAlarmAudio() {
+        if (alarmAudioEl) return;
+        try {
+          const url = createChimeWavUrl();
+          alarmAudioEl = new Audio(url);
+          alarmAudioEl.preload = 'auto';
+          alarmAudioEl.playsInline = true;
+          alarmAudioEl.addEventListener('ended', () => {
+            isAlarmPlaying = false;
+          });
+        } catch (e) {}
+      }
+
+      initAlarmAudio();
+
       function unlockAudioContext() {
+        initAlarmAudio();
+        if (alarmAudioEl && !alarmAudioUnlocked && !isAlarmPlaying) {
+          try {
+            alarmAudioEl.muted = true;
+            const p = alarmAudioEl.play();
+            if (p && typeof p.then === 'function') {
+              p.then(() => {
+                if (!isAlarmPlaying) {
+                  alarmAudioEl.pause();
+                  alarmAudioEl.currentTime = 0;
+                }
+                alarmAudioEl.muted = false;
+                alarmAudioUnlocked = true;
+              }).catch(() => {
+                alarmAudioEl.muted = false;
+              });
+            }
+          } catch (e) {
+            alarmAudioEl.muted = false;
+          }
+        }
+
         try {
           const AudioCtx = window.AudioContext || window.webkitAudioContext;
           if (!AudioCtx) return;
           if (!sharedAudioCtx) {
             sharedAudioCtx = new AudioCtx();
           }
-          if (sharedAudioCtx.state === 'suspended') {
+          if (sharedAudioCtx.state !== 'running') {
             sharedAudioCtx.resume();
           }
         } catch (e) {}
@@ -2344,22 +2490,19 @@
       document.addEventListener('touchstart', unlockAudioContext, { passive: true });
       document.addEventListener('click', unlockAudioContext, { passive: true });
 
-      function playRestDoneAlert() {
-        if (!settings.soundEnabled) return;
+      function playFallbackWebAudio() {
         try {
-          if (navigator.vibrate) navigator.vibrate([200, 90, 200]);
           const AudioCtx = window.AudioContext || window.webkitAudioContext;
-          if (AudioCtx) {
-            if (!sharedAudioCtx) sharedAudioCtx = new AudioCtx();
-            if (sharedAudioCtx.state === 'suspended') {
-              sharedAudioCtx.resume();
-            }
+          if (!AudioCtx) return;
+          if (!sharedAudioCtx) sharedAudioCtx = new AudioCtx();
+
+          const runOsc = () => {
             const now = sharedAudioCtx.currentTime;
             const osc1 = sharedAudioCtx.createOscillator();
             const gain1 = sharedAudioCtx.createGain();
             osc1.type = 'sine';
             osc1.frequency.setValueAtTime(880, now);
-            gain1.gain.setValueAtTime(0.1, now);
+            gain1.gain.setValueAtTime(0.15, now);
             gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
             osc1.connect(gain1);
             gain1.connect(sharedAudioCtx.destination);
@@ -2369,15 +2512,49 @@
             const osc2 = sharedAudioCtx.createOscillator();
             const gain2 = sharedAudioCtx.createGain();
             osc2.type = 'sine';
-            osc2.frequency.setValueAtTime(1174.66, now + 0.18);
-            gain2.gain.setValueAtTime(0.11, now + 0.18);
-            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.5);
+            osc2.frequency.setValueAtTime(1174.66, now + 0.22);
+            gain2.gain.setValueAtTime(0.16, now + 0.22);
+            gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
             osc2.connect(gain2);
             gain2.connect(sharedAudioCtx.destination);
-            osc2.start(now + 0.18);
-            osc2.stop(now + 0.52);
+            osc2.start(now + 0.22);
+            osc2.stop(now + 0.62);
+          };
+
+          if (sharedAudioCtx.state !== 'running') {
+            sharedAudioCtx.resume().then(runOsc).catch(() => {});
+          } else {
+            runOsc();
           }
         } catch (e) {}
+      }
+
+      function playRestDoneAlert(forceTest = false) {
+        if (!forceTest && !settings.soundEnabled) return;
+        try {
+          if (navigator.vibrate) navigator.vibrate([200, 90, 200]);
+        } catch (e) {}
+
+        initAlarmAudio();
+        if (alarmAudioEl) {
+          try {
+            isAlarmPlaying = true;
+            alarmAudioEl.muted = false;
+            alarmAudioEl.volume = 1.0;
+            alarmAudioEl.currentTime = 0;
+            const playPromise = alarmAudioEl.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+              playPromise.catch(() => {
+                isAlarmPlaying = false;
+                playFallbackWebAudio();
+              });
+            }
+            return;
+          } catch (e) {
+            isAlarmPlaying = false;
+          }
+        }
+        playFallbackWebAudio();
       }
 
       // =========================================================================
@@ -2593,7 +2770,7 @@
         renderRestTimerUI();
         updateWakeLockState();
         syncDialScrollPositions();
-        playRestDoneAlert();
+        playRestDoneAlert(false);
         showToast('휴식 시간이 종료됐어요! 다음 세트를 시작하세요');
       }
 
@@ -2720,6 +2897,7 @@
       });
 
       document.getElementById('btn-rest-plus').addEventListener('click', () => {
+        unlockAudioContext();
         const currentEnd = getStoredRestEndTime();
         if (currentEnd && currentEnd > Date.now()) {
           const newEnd = currentEnd + 15000;
@@ -2736,7 +2914,6 @@
       // 5. 복귀 시 즉시 동기화 (visibilitychange, pageshow, focus)
       // =========================================================================
       function syncTimersOnResume() {
-        // 1) 휴식 타이머 동기화
         const restEnd = getStoredRestEndTime();
         if (restEnd) {
           const remainingMs = restEnd - Date.now();
@@ -2748,7 +2925,6 @@
           }
         }
 
-        // 2) 총 운동 시간 타이머 동기화
         const wt = getStoredWorkoutTimer();
         if (wt) {
           updateTotalWorkoutTimeDisplay();
@@ -2757,7 +2933,6 @@
           }
         }
 
-        // 3) 화면 켜짐 유지(Wake Lock) 재요청
         updateWakeLockState();
       }
 
@@ -2809,7 +2984,7 @@
         }
       }
 
-      // ---------------- 1. 홈 화면 (달력 + 일일 총 운동시간 요약) ----------------
+      // ---------------- 1. 홈 화면 ----------------
       function renderHome() {
         const monthLabel = document.getElementById('calendar-month-label');
         monthLabel.textContent = `${viewYear}년 ${viewMonth + 1}월`;
@@ -3138,7 +3313,6 @@
           }
         }
 
-        // 총 운동 시간 타이머 시작 또는 기존 진행 세션 동기화
         if (storedWt && storedWt.dateKey === selectedDateKey) {
           updateTotalWorkoutTimeDisplay();
           if (storedWt.isRunning) ensureWorkoutTickLoop();
@@ -3600,7 +3774,7 @@
         if (e.key === 'Enter') addNewExercise(newExInput.value, true);
       });
 
-      // 기록 저장 (일일 총 운동 시간 기록 및 타이머 기준 시각 정리)
+      // 기록 저장
       document.getElementById('btn-finish-workout').addEventListener('click', () => {
         const totalSec = getCurrentTotalWorkoutSeconds();
         stopRestTimer(true);
@@ -3611,7 +3785,6 @@
           saveLogs(logs);
           showToast('운동 기록이 비워졌어요');
         } else {
-          // 전체 운동 시간을 해당 날짜의 세션 총 시간으로 저장
           activeExercises.forEach((ex, idx) => {
             ex.elapsedSeconds = idx === 0 ? totalSec : 0;
           });
@@ -3730,12 +3903,13 @@
         themeGrid.innerHTML = '';
         THEMES.forEach(t => {
           const isActive = settings.theme === t.id;
+          const borderStyle = t.border ? `border: 1.5px solid ${t.border};` : '';
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = `theme-option-card ${isActive ? 'active' : ''}`;
           btn.innerHTML = `
             <div class="theme-option-left">
-              <span class="theme-swatch" style="background-color: ${t.color};">${isActive ? '✓' : ''}</span>
+              <span class="theme-swatch" style="background-color: ${t.color}; ${borderStyle}">${isActive ? '✓' : ''}</span>
               <div>
                 <div class="theme-name">${t.name}</div>
                 <div class="theme-sub">${t.sub}</div>
@@ -3818,11 +3992,21 @@
         }
       });
 
+      document.getElementById('btn-test-rest-sound').addEventListener('click', () => {
+        playRestDoneAlert(true);
+        showToast('알림음 차임벨을 재생했어요');
+      });
+
       document.getElementById('toggle-rest-sound').addEventListener('click', () => {
         settings.soundEnabled = !settings.soundEnabled;
         saveSettings(settings);
         renderSettingsView();
-        showToast(settings.soundEnabled ? '휴식 종료 알림을 켰어요' : '휴식 종료 알림을 껐어요');
+        if (settings.soundEnabled) {
+          playRestDoneAlert(true);
+          showToast('휴식 종료 알림음을 켰어요');
+        } else {
+          showToast('휴식 종료 알림음을 껐어요');
+        }
       });
 
       function buildBackupPayload() {
